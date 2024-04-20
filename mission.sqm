@@ -1,0 +1,778 @@
+version=54;
+class EditorData
+{
+	moveGridStep=1;
+	angleGridStep=0.2617994;
+	scaleGridStep=1;
+	autoGroupingDist=10;
+	toggles=513;
+	class ItemIDProvider
+	{
+		nextID=38;
+	};
+	class MarkerIDProvider
+	{
+		nextID=1;
+	};
+	class Camera
+	{
+		pos[]={20037.605,109.127,13502.708};
+		dir[]={-0.26266825,-0.2894429,-0.92045009};
+		up[]={-0.079427324,0.95719522,-0.27833164};
+		aside[]={-0.96161151,-7.4505806e-009,0.27441448};
+	};
+};
+binarizationWanted=0;
+sourceName="NZF_PatrolOps2";
+addons[]=
+{
+	"rhsusf_main",
+	"A3_Ui_F",
+	"rhsusf_c_troops",
+	"A3_Structures_F_Orange_VR_Helpers",
+	"A3_Structures_F_Civ_InfoBoards"
+};
+class AddonsMetaData
+{
+	class List
+	{
+		items=5;
+		class Item0
+		{
+			className="rhsusf_main";
+			name="rhsusf_main";
+			author="Red Hammer Studios";
+			url="http://www.rhsmods.org/";
+		};
+		class Item1
+		{
+			className="A3_Ui_F";
+			name="Arma 3 - User Interface";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item2
+		{
+			className="rhsusf_c_troops";
+			name="RHSUSF Infantry & Equipment";
+			author="Red Hammer Studios";
+			url="http://www.rhsmods.org/";
+		};
+		class Item3
+		{
+			className="A3_Structures_F_Orange";
+			name="Arma 3 Orange - Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item4
+		{
+			className="A3_Structures_F";
+			name="Arma 3 - Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+	};
+};
+dlcs[]=
+{
+	"RHS_USAF",
+	"Orange"
+};
+randomSeed=16687137;
+class ScenarioData
+{
+	author="[NZF]JD Wang";
+};
+class Mission
+{
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0.30000001;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		wavesForced=1;
+		windForced=1;
+		year=2015;
+		month=10;
+		day=6;
+		hour=12;
+		minute=0;
+		startFogDecay=0.013;
+		forecastFogDecay=0.013;
+	};
+	class Entities
+	{
+		items=22;
+		class Item0
+		{
+			dataType="Marker";
+			position[]={12373.629,31.999884,2032.1908};
+			name="patrolBase_0";
+			type="rhs_flag_USA";
+			id=0;
+		};
+		class Item1
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={12293.553,32.763367,2005.4663};
+					};
+					side="West";
+					flags=7;
+					class Attributes
+					{
+						isPlayer=1;
+					};
+					id=8;
+					type="rhsusf_army_ocp_rifleman";
+				};
+			};
+			class Attributes
+			{
+			};
+			id=7;
+		};
+		class Item2
+		{
+			dataType="Marker";
+			position[]={12237.367,341.95001,17252.787};
+			name="patrolBase_1";
+			type="rhs_flag_USA";
+			id=9;
+		};
+		class Item3
+		{
+			dataType="Marker";
+			position[]={20068.928,105.46101,13517.365};
+			name="patrolBase_2";
+			type="rhs_flag_USA";
+			id=10;
+			atlOffset=0.00021362305;
+		};
+		class Item4
+		{
+			dataType="Marker";
+			position[]={3852.3335,672.62543,17799.148};
+			name="patrolBase_3";
+			type="rhs_flag_USA";
+			id=11;
+			atlOffset=0.90655518;
+		};
+		class Item5
+		{
+			dataType="Marker";
+			position[]={5299.9746,296.57101,10829.908};
+			name="patrolBase_4";
+			type="rhs_flag_USA";
+			id=12;
+		};
+		class Item6
+		{
+			dataType="Marker";
+			position[]={10881.797,41.222733,7530.2979};
+			name="patrolBase_5";
+			type="rhs_flag_USA";
+			id=13;
+		};
+		class Item7
+		{
+			dataType="Marker";
+			position[]={15849.593,28.856426,5602.5605};
+			name="patrolBase_6";
+			type="rhs_flag_USA";
+			id=14;
+			atlOffset=1.9073486e-006;
+		};
+		class Item8
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={12287.831,32.754066,2006.0254};
+				angles[]={0.0278522,0.020402899,0.0023670318};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="if (isServer) then { " \n " [BLUFOR, getPosATL this, ""Respawn""] call BIS_fnc_addRespawnPosition; " \n "}";
+				disableSimulation=1;
+			};
+			id=15;
+			type="Sign_Sphere100cm_Geometry_F";
+			atlOffset=3.8146973e-006;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="hideObject";
+					expression="if !(is3DEN) then {_this hideobjectglobal _value;};";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=1;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
+		class Item9
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={12291.044,33.669464,2007.9929};
+				angles[]={0.027855454,0,6.279171};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="arsenal_1";
+			};
+			id=16;
+			type="Land_MapBoard_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ObjectTextureCustom0";
+					expression="_this setObjectTextureGlobal [0,_value]";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="media\images\whiteboard.paa";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item10
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={15823.801,28.564915,5603.688};
+				angles[]={0.027817933,0.020402899,6.2594218};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="if (isServer) then { " \n " [BLUFOR, getPosATL this, ""Respawn""] call BIS_fnc_addRespawnPosition; " \n "}";
+				disableSimulation=1;
+			};
+			id=26;
+			type="Sign_Sphere100cm_Geometry_F";
+			atlOffset=3.8146973e-006;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="hideObject";
+					expression="if !(is3DEN) then {_this hideobjectglobal _value;};";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=1;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
+		class Item11
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={15827.014,29.447445,5605.6553};
+				angles[]={0.011091675,0,6.2761517};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="arsenal_2";
+			};
+			id=27;
+			type="Land_MapBoard_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ObjectTextureCustom0";
+					expression="_this setObjectTextureGlobal [0,_value]";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="media\images\whiteboard.paa";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item12
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={10911.044,42.835495,7573.312};
+				angles[]={6.259192,0.020402899,6.2601914};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="if (isServer) then { " \n " [BLUFOR, getPosATL this, ""Respawn""] call BIS_fnc_addRespawnPosition; " \n "}";
+				disableSimulation=1;
+			};
+			id=28;
+			type="Sign_Sphere100cm_Geometry_F";
+			atlOffset=3.8146973e-006;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="hideObject";
+					expression="if !(is3DEN) then {_this hideobjectglobal _value;};";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=1;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
+		class Item13
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={10914.257,43.778214,7575.2793};
+				angles[]={6.259192,0,6.2601914};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="arsenal_3";
+			};
+			id=29;
+			type="Land_MapBoard_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ObjectTextureCustom0";
+					expression="_this setObjectTextureGlobal [0,_value]";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="media\images\whiteboard.paa";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item14
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5262.5654,296.91275,10795.979};
+				angles[]={0.00069053395,0.020402899,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="if (isServer) then { " \n " [BLUFOR, getPosATL this, ""Respawn""] call BIS_fnc_addRespawnPosition; " \n "}";
+				disableSimulation=1;
+			};
+			id=30;
+			type="Sign_Sphere100cm_Geometry_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="hideObject";
+					expression="if !(is3DEN) then {_this hideobjectglobal _value;};";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=1;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
+		class Item15
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5265.7783,297.88,10797.945};
+				angles[]={0.00069053395,0,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="arsenal_4";
+			};
+			id=31;
+			type="Land_MapBoard_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ObjectTextureCustom0";
+					expression="_this setObjectTextureGlobal [0,_value]";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="media\images\whiteboard.paa";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item16
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3832.9775,672.47711,17826.045};
+				angles[]={6.2151451,0.020402899,0.0058390028};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="if (isServer) then { " \n " [BLUFOR, getPosATL this, ""Respawn""] call BIS_fnc_addRespawnPosition; " \n "}";
+				disableSimulation=1;
+			};
+			id=32;
+			type="Sign_Sphere100cm_Geometry_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="hideObject";
+					expression="if !(is3DEN) then {_this hideobjectglobal _value;};";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=1;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
+		class Item17
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3836.1904,673.30841,17828.014};
+				angles[]={0.0014235723,0,6.219533};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="arsenal_5";
+			};
+			id=33;
+			type="Land_MapBoard_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ObjectTextureCustom0";
+					expression="_this setObjectTextureGlobal [0,_value]";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="media\images\whiteboard.paa";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item18
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={12229.265,341.95001,17311.619};
+				angles[]={0,0.020402899,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="if (isServer) then { " \n " [BLUFOR, getPosATL this, ""Respawn""] call BIS_fnc_addRespawnPosition; " \n "}";
+				disableSimulation=1;
+			};
+			id=34;
+			type="Sign_Sphere100cm_Geometry_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="hideObject";
+					expression="if !(is3DEN) then {_this hideobjectglobal _value;};";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=1;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
+		class Item19
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={12232.478,342.91888,17313.588};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="arsenal_6";
+			};
+			id=35;
+			type="Land_MapBoard_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ObjectTextureCustom0";
+					expression="_this setObjectTextureGlobal [0,_value]";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="media\images\whiteboard.paa";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item20
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={20033.23,104.30988,13512.117};
+				angles[]={0.02199479,0.020402899,0.0020132356};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="if (isServer) then { " \n " [BLUFOR, getPosATL this, ""Respawn""] call BIS_fnc_addRespawnPosition; " \n "}";
+				disableSimulation=1;
+			};
+			id=36;
+			type="Sign_Sphere100cm_Geometry_F";
+			atlOffset=1.5258789e-005;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=0;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="hideObject";
+					expression="if !(is3DEN) then {_this hideobjectglobal _value;};";
+					class Value
+					{
+						class data
+						{
+							singleType="BOOL";
+							value=1;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
+		class Item21
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={20036.443,105.24011,13514.085};
+				angles[]={0.025994543,0,6.2811723};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="arsenal_7";
+			};
+			id=37;
+			type="Land_MapBoard_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ObjectTextureCustom0";
+					expression="_this setObjectTextureGlobal [0,_value]";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="media\images\whiteboard.paa";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+	};
+};

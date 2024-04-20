@@ -1,0 +1,62 @@
+skipLobby = 1;					//Role selection is done in game
+respawn = 3;                    //Respawn at respawn markers
+respawnOnStart = -1;	    	//Don't respawn, don't run onPlayerRespawn on start
+respawnDelay = 10;				//Set Respawn timer
+enableDebugConsole = 1;     	//Allows debug console for admin
+disabledAI = 1;			        //Stop AI from filling playable roles
+allowProfileGlasses = 0;        //Stops players loading in with facewear
+
+respawnTemplatesWest[] = { "Wave","MenuPosition"};
+//*****************************************************************************************************************
+//Disable all chat channels except vehicle and local
+disableChannels[] = {
+	{
+		0,		// channel ID
+		true,	// disable text chat
+		true	// disable voice chat
+	},
+	{ 1, true, true },{ 2, true, true },{ 3, true, true },{ 4, false, true },{ 5, false, true }
+};
+//*****************************************************************************************************************
+//Mission Details
+author			= "[NZF]JD Wang";
+onLoadName		= "NZF PATROL OPERATIONS";
+onLoadMission	= "";
+loadScreen		= "media\images\titleshot.jpg";
+overviewPicture  = "media\images\overview.paa";
+
+//*****************************************************************************************************************
+//Corpse management 
+corpseManagerMode = 3;
+corpseRemovalMinTime = 300;
+corpseRemovalMaxTime = 600;
+wreckManagerMode = 2;
+minPlayerDistance = 50;
+//*****************************************************************************************************************
+class CfgSounds {
+
+    sounds[] = {};
+
+        class allahuAkbar
+        { 
+            name = "allahuAkbar";
+            sound[] = {media\sounds\allahuAkbar.ogg, db+32, 1.0};
+            titles[] = {};
+        };
+		
+};
+//*****************************************************************************************************************
+#include "GUI\masterHandler.hpp"
+
+class CfgFunctions
+{
+   	#include "PatrolOps\cfgfunctions.hpp"
+	#include "Functions.hpp" //Dynamic Groups
+	#include "modules\grad-gpsTracker\cfgFunctions.hpp" //GRAD Tracker
+};
+
+#include "Config\Config_Groups.hpp" //Dynamic Groups
+
+class Extended_PreInit_EventHandlers {
+	PatrolOps = call compile preprocessFileLineNumbers "XEH_preInit.sqf";
+};

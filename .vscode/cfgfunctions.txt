@@ -1,0 +1,55 @@
+
+class patrolOps
+{
+	tag = "PatrolOps";
+	class patrolGeneration 
+	{
+		file = "PatrolOps\patrol generation";
+		class initpatrol {};
+		class generateRoute {};
+		class generateLocations {};
+	};
+	class effects
+	{
+		file = "PatrolOps\effects";
+		class unconscious {};
+	};
+};
+class DT_Core {
+	tag = "DT";
+
+	class Groups {
+		file = "Groups";
+		class assignPlayer {};
+		class handleDisconnect {};
+		class initGroupMenu {};
+		class onGroupMenuTvSelectChange {};
+		class onRespawn {};
+		class removeFromGroup {};
+		class selectPosition {};
+		class setupPlayer {};
+		class updateGroups {};
+	};
+};
+#ifndef MODULES_DIRECTORY
+    #define MODULES_DIRECTORY modules
+#endif
+
+class grad_gpsTracker {
+    class common {
+        file = MODULES_DIRECTORY\grad-gpsTracker\functions;
+
+        class addPFH {};
+        class closeTitle {};
+        class createGPS {};
+        class getModuleRoot {};
+        class initModule {preInit = 1;};
+        class openDialog {};
+        class openTitle {};
+        class setTarget {};
+        class updateArrow {};
+        class updateBackground {};
+        class updateDistance {};
+        class updateReception {};
+    };
+};
