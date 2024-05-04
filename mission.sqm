@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=38;
+		nextID=39;
 	};
 	class MarkerIDProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={20037.605,109.127,13502.708};
-		dir[]={-0.26266825,-0.2894429,-0.92045009};
-		up[]={-0.079427324,0.95719522,-0.27833164};
-		aside[]={-0.96161151,-7.4505806e-009,0.27441448};
+		pos[]={12294.284,58.595203,1989.9944};
+		dir[]={0.0029953725,-0.80991012,0.58654642};
+		up[]={0.0041359914,0.58655393,0.80989957};
+		aside[]={0.99998695,0,-0.0051067285};
 	};
 };
 binarizationWanted=0;
@@ -30,13 +30,14 @@ addons[]=
 	"A3_Ui_F",
 	"rhsusf_c_troops",
 	"A3_Structures_F_Orange_VR_Helpers",
-	"A3_Structures_F_Civ_InfoBoards"
+	"A3_Structures_F_Civ_InfoBoards",
+	"A3_Modules_F_Curator_Curator"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=5;
+		items=6;
 		class Item0
 		{
 			className="rhsusf_main";
@@ -69,6 +70,13 @@ class AddonsMetaData
 		{
 			className="A3_Structures_F";
 			name="Arma 3 - Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item5
+		{
+			className="A3_Modules_F_Curator";
+			name="Arma 3 Zeus Update - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -108,14 +116,15 @@ class Mission
 	};
 	class Entities
 	{
-		items=22;
+		items=23;
 		class Item0
 		{
 			dataType="Marker";
-			position[]={12373.629,31.999884,2032.1908};
-			name="patrolBase_0";
+			position[]={12373.629,32,2032.191};
+			name="patrolBase_Kinduf";
 			type="rhs_flag_USA";
 			id=0;
+			atlOffset=0.00012207031;
 		};
 		class Item1
 		{
@@ -150,52 +159,53 @@ class Mission
 		{
 			dataType="Marker";
 			position[]={12237.367,341.95001,17252.787};
-			name="patrolBase_1";
+			name="patrolBase_KalaeNoowi";
 			type="rhs_flag_USA";
 			id=9;
 		};
 		class Item3
 		{
 			dataType="Marker";
-			position[]={20068.928,105.46101,13517.365};
-			name="patrolBase_2";
+			position[]={20068.928,105.461,13517.365};
+			name="patrolBase_FOBEast";
 			type="rhs_flag_USA";
 			id=10;
-			atlOffset=0.00021362305;
+			atlOffset=0.00019836426;
 		};
 		class Item4
 		{
 			dataType="Marker";
-			position[]={3852.3335,672.62543,17799.148};
-			name="patrolBase_3";
+			position[]={3852.333,672.625,17799.148};
+			name="patrolBase_Martin";
 			type="rhs_flag_USA";
 			id=11;
-			atlOffset=0.90655518;
+			atlOffset=0.90612793;
 		};
 		class Item5
 		{
 			dataType="Marker";
-			position[]={5299.9746,296.57101,10829.908};
-			name="patrolBase_4";
+			position[]={5299.9751,296.57101,10829.908};
+			name="patrolBase_Bushlurker";
 			type="rhs_flag_USA";
 			id=12;
 		};
 		class Item6
 		{
 			dataType="Marker";
-			position[]={10881.797,41.222733,7530.2979};
-			name="patrolBase_5";
+			position[]={10881.797,41.223,7530.2979};
+			name="patrolBase_GreenCamp";
 			type="rhs_flag_USA";
 			id=13;
+			atlOffset=0.00026702881;
 		};
 		class Item7
 		{
 			dataType="Marker";
-			position[]={15849.593,28.856426,5602.5605};
-			name="patrolBase_6";
+			position[]={15849.593,28.856001,5602.561};
+			name="patrolBase_Fabiano";
 			type="rhs_flag_USA";
 			id=14;
-			atlOffset=1.9073486e-006;
+			atlOffset=-0.00041007996;
 		};
 		class Item8
 		{
@@ -772,6 +782,72 @@ class Mission
 					};
 				};
 				nAttributes=1;
+			};
+		};
+		class Item22
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={12296.404,32.843811,2002.067};
+			};
+			id=38;
+			type="ModuleCurator_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ModuleCurator_F_Owner";
+					expression="_this setVariable ['Owner',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="#adminLogged";
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="ModuleCurator_F_Forced";
+					expression="_this setVariable ['Forced',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=0;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property="ModuleCurator_F_Name";
+					expression="_this setVariable ['Name',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="";
+						};
+					};
+				};
+				class Attribute3
+				{
+					property="ModuleCurator_F_Addons";
+					expression="_this setVariable ['Addons',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=2;
+						};
+					};
+				};
+				nAttributes=4;
 			};
 		};
 	};
