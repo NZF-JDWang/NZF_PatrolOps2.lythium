@@ -15,6 +15,11 @@
 */
 if (!isServer) exitWith {};
 
+// Clean up and previous patrols 
+
+private _cleanUp = [] call PatrolOps_fnc_patrolCleanUp;
+waitUntil {sleep 0.1; _cleanUp};
+
 // Get the patrol locations
 private _routeData = [] call PatrolOps_fnc_generateLocations;
 // Wait for locations to be generated 
@@ -35,7 +40,6 @@ _startFobRoad = [getMarkerPos _startFOB, 500] call BIS_fnc_nearestRoad;
 _firstObjectiveRoad = [_locPosition, 500] call BIS_fnc_nearestRoad;
 _endFobRoad = [getMarkerPos _endFOB, 500] call BIS_fnc_nearestRoad;
 
-hint str _startFobRoad;
 // Wait for road retrieval
 sleep 2;
 

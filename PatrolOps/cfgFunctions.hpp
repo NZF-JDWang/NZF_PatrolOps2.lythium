@@ -7,6 +7,7 @@ class patrolOps
 		class initpatrol {};
 		class generateRouteMarkers {};
 		class generateLocations {};
+		class patrolCleanUp {};
 
 	};
 	class effects
