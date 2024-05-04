@@ -15,7 +15,7 @@
 		3:Texture of the road object
 
 	Examples:
-		["_road"] call PatrolOps_fnc_getRoadInfo;
+		[_road] call PatrolOps_fnc_getRoadInfo;
 */
 params ["_road"];
 

@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=41;
+		nextID=43;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=2;
+		nextID=8;
 	};
 	class Camera
 	{
-		pos[]={12294.284,58.595203,1989.9944};
-		dir[]={0.0029953725,-0.80991012,0.58654642};
-		up[]={0.0041359914,0.58655393,0.80989957};
-		aside[]={0.99998695,0,-0.0051067285};
+		pos[]={-36.80928,182.26241,-39.636719};
+		dir[]={0.40181997,-0.57619435,0.71171689};
+		up[]={0.2832776,0.81731272,0.50175071};
+		aside[]={0.87080121,0,-0.4916355};
 	};
 };
 binarizationWanted=0;
@@ -32,10 +32,10 @@ addons[]=
 {
 	"rhsusf_main",
 	"A3_Ui_F",
-	"rhsusf_c_troops",
 	"A3_Modules_F_Curator_Curator",
 	"A3_Structures_F_Orange_VR_Helpers",
-	"A3_Structures_F_Civ_InfoBoards"
+	"A3_Structures_F_Civ_InfoBoards",
+	"rhsusf_c_troops"
 };
 class AddonsMetaData
 {
@@ -58,38 +58,38 @@ class AddonsMetaData
 		};
 		class Item2
 		{
-			className="rhsusf_c_troops";
-			name="RHSUSF Infantry & Equipment";
-			author="Red Hammer Studios";
-			url="http://www.rhsmods.org/";
-		};
-		class Item3
-		{
 			className="A3_Modules_F_Curator";
 			name="Arma 3 Zeus Update - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item4
+		class Item3
 		{
 			className="A3_Structures_F_Orange";
 			name="Arma 3 Orange - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item5
+		class Item4
 		{
 			className="A3_Structures_F";
 			name="Arma 3 - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item5
+		{
+			className="rhsusf_c_troops";
+			name="RHSUSF Infantry & Equipment";
+			author="Red Hammer Studios";
+			url="http://www.rhsmods.org/";
+		};
 	};
 };
 dlcs[]=
 {
-	"RHS_USAF",
-	"Orange"
+	"Orange",
+	"RHS_USAF"
 };
 randomSeed=16687137;
 class ScenarioData
@@ -132,42 +132,13 @@ class Mission
 		};
 		class Item1
 		{
-			dataType="Group";
-			side="West";
-			class Entities
-			{
-				items=1;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={12293.553,32.763367,2005.4663};
-					};
-					side="West";
-					flags=7;
-					class Attributes
-					{
-						isPlayer=1;
-					};
-					id=8;
-					type="rhsusf_army_ocp_rifleman";
-				};
-			};
-			class Attributes
-			{
-			};
-			id=7;
-		};
-		class Item2
-		{
 			dataType="Marker";
 			position[]={12237.367,341.95001,17252.787};
 			name="patrolBase_KalaeNoowi";
 			type="rhs_flag_USA";
 			id=9;
 		};
-		class Item3
+		class Item2
 		{
 			dataType="Marker";
 			position[]={20068.928,105.461,13517.365};
@@ -176,7 +147,7 @@ class Mission
 			id=10;
 			atlOffset=0.00019836426;
 		};
-		class Item4
+		class Item3
 		{
 			dataType="Marker";
 			position[]={3852.333,672.625,17799.148};
@@ -185,7 +156,7 @@ class Mission
 			id=11;
 			atlOffset=0.90612793;
 		};
-		class Item5
+		class Item4
 		{
 			dataType="Marker";
 			position[]={5299.9751,296.57101,10829.908};
@@ -193,7 +164,7 @@ class Mission
 			type="rhs_flag_USA";
 			id=12;
 		};
-		class Item6
+		class Item5
 		{
 			dataType="Marker";
 			position[]={10881.797,41.223,7530.2979};
@@ -202,7 +173,7 @@ class Mission
 			id=13;
 			atlOffset=0.00026702881;
 		};
-		class Item7
+		class Item6
 		{
 			dataType="Marker";
 			position[]={15849.593,28.856001,5602.561};
@@ -211,11 +182,10 @@ class Mission
 			id=14;
 			atlOffset=-0.00041007996;
 		};
-		class Item8
+		class Item7
 		{
 			dataType="Layer";
 			name="Layer 1";
-			state=2;
 			class Entities
 			{
 				items=1;
@@ -288,11 +258,10 @@ class Mission
 			};
 			id=39;
 		};
-		class Item9
+		class Item8
 		{
 			dataType="Layer";
 			name="Layer 2";
-			state=2;
 			class Entities
 			{
 				items=14;
@@ -876,6 +845,35 @@ class Mission
 			};
 			id=40;
 			atlOffset=55.412506;
+		};
+		class Item9
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={0.77050686,140.66518,0.52886242};
+					};
+					side="West";
+					flags=7;
+					class Attributes
+					{
+						isPlayer=1;
+					};
+					id=42;
+					type="rhsusf_army_ocp_rifleman";
+				};
+			};
+			class Attributes
+			{
+			};
+			id=41;
 		};
 	};
 };

@@ -136,3 +136,10 @@ _statement2 = {
 };
 _action2 = ["CloseTracker","Close Tracker","",_statement2,_conditionAlreadyOpen] call ace_interact_menu_fnc_createAction;
 [player, 1, ["ACE_SelfActions"], _action2] call ace_interact_menu_fnc_addActionToObject;
+
+// Move player to starting Patrol Base 
+private _startingFOB = getMarkerPos startingFOB;
+private _nearestRespawn = nearestObjects [_startingFOB, ["Sign_Sphere100cm_Geometry_F"],100];
+player setpos (getpos (_nearestRespawn select 0));
+
+

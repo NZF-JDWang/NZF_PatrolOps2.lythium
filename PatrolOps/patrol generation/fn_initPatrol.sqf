@@ -36,9 +36,9 @@ _firstLocMarker setMarkerSizeLocal [1.5, 1.5];
 _firstLocMarker setMarkerAlpha 1;
 
 // Grab the nearest roads
-_startFobRoad = [getMarkerPos _startFOB, 500] call BIS_fnc_nearestRoad;
-_firstObjectiveRoad = [_locPosition, 500] call BIS_fnc_nearestRoad;
-_endFobRoad = [getMarkerPos _endFOB, 500] call BIS_fnc_nearestRoad;
+_startFobRoad = [getMarkerPos _startFOB, 1000] call BIS_fnc_nearestRoad;
+_firstObjectiveRoad = [_locPosition, 1000] call BIS_fnc_nearestRoad;
+_endFobRoad = [getMarkerPos _endFOB, 1000] call BIS_fnc_nearestRoad;
 
 // Wait for road retrieval
 sleep 2;
@@ -61,3 +61,8 @@ waitUntil {scriptDone _inRoute};
     2
 ] call CBA_fnc_waitAndExecute;
 
+sleep 1;
+
+
+//save some data 
+missionnamespace setvariable ["secondPatrol", true, true];

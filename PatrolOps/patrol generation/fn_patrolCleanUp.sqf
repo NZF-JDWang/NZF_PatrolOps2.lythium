@@ -13,11 +13,13 @@
 	Examples:
 		[] call PatrolOps_fnc_patrolCleanUp;
 */
+if (!isServer) exitwith {};
+if (!secondPatrol) exitwith {true};
+
 // Set all players back to default camouflageCoef (remove the bounty)
 {_x setUnitTrait ["camouflageCoef", 1]} foreach allPlayers;
 
-// Hide all patrolbase markers and reset FOB's
-{_x setMarkerAlpha 0} foreach patrolOps_patrolBases;
+// Reset FOB's
 missionNamespace setVariable ["startingFOB", nil, true];
 missionNamespace setVariable ["endFOB", nil, true];
 
@@ -32,7 +34,5 @@ if (count (missionNamespace getvariable "patrolOps_allRouteMarkers") > 0) then {
 // Delete and reset location markers 
 missionnamespace setvariable ["firstPatrolLocationData", nil, true];
 deleteMarker "firstLoc";
-
-
 
 true;

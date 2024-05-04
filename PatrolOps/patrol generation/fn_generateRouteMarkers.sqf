@@ -16,10 +16,13 @@
 if (!isServer) exitWith {};
 
 // Define script parameters
-params ["_colour", "_startLoc", "_finishLoc", "_routeName"];
+params ["_colour","_startLoc","_finishLoc","_routeName"];
 
+// Make sure we grab an actual road location
+private _startRoad = getpos ((nearestTerrainObjects [_startLoc, ["MAIN ROAD","ROAD","TRACK"], 2000]) select 0);
+private _finishRoad = getpos ((nearestTerrainObjects [_finishLoc, ["MAIN ROAD","ROAD","TRACK"], 2000]) select 0);
 // Calculate path using a wheeled APC
-private _pathAgent = calculatePath ["wheeled_APC", "careless", _startLoc, _finishLoc];
+private _pathAgent = calculatePath ["wheeled_APC", "careless", _startRoad, _finishRoad];
 _pathAgent setVariable ["pathColour", _colour];
 _pathAgent setVariable ["_routeName", _routeName];
 
@@ -37,6 +40,12 @@ _pathAgent addEventHandler ["PathCalculated", {
         _marker setMarkerSizeLocal [.5, .5];
         _marker setMarkerAlphaLocal 0;
         _marker setMarkerShadowLocal false;
+
+        if (_routeName isEqualTo "outRoute") then {_marker setMarkerPosLocal  [getMarkerPos _marker select 0, (getMarkerPos _marker select 1)+3]};
+        if (_routeName isEqualTo "inRoute") then {_marker setMarkerPosLocal  [getMarkerPos _marker select 0, (getMarkerPos _marker select 1)-3]};
+
+        
+
     } forEach (_this select 1);
     
     // Remove event handler after execution
