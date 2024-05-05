@@ -1,5 +1,5 @@
 if (!isServer) exitwith {};
-
+// Debug on or off 
 missionnamespace setvariable ["PATROLOPS_DEBUG", true];
 
 patrolOps_patrolBases = allMapMarkers select {_x find "patrolBase" >= 0};

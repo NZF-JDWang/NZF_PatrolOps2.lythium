@@ -61,8 +61,14 @@ waitUntil {scriptDone _inRoute};
     2
 ] call CBA_fnc_waitAndExecute;
 
-sleep 1;
-
+// find any locations the patrol route passes by 
+[
+    {
+       [] call PatrolOps_fnc_findSideLocations;
+    }, 
+    [], 
+    2
+] call CBA_fnc_waitAndExecute;
 
 //save some data 
 missionnamespace setvariable ["secondPatrol", true, true];
