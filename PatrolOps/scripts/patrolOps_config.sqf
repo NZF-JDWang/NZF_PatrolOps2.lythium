@@ -1,5 +1,7 @@
 if (!isServer) exitwith {};
 
+missionnamespace setvariable ["PATROLOPS_DEBUG", true];
+
 patrolOps_patrolBases = allMapMarkers select {_x find "patrolBase" >= 0};
 
 //Setup all the global variables

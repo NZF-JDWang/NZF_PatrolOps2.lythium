@@ -8,7 +8,7 @@
 		NONE
 
 	Returns:
-		Nothing
+		true
 
 	Examples:
 		[] call PatrolOps_fnc_patrolCleanUp;

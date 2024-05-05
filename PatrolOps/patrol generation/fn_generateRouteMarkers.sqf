@@ -7,7 +7,7 @@
 	Parameter(s):
 
 	Returns:
-		Nothing
+		true
 
 	Examples:
 		["_colour","_startLoc","_finishLoc"] call PatrolOps_fnc_generateRouteMarkers;

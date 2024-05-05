@@ -19,5 +19,7 @@ class patrolOps
 	{
 		file = "PatrolOps\functions";
 		class getRoadInfo {};
+		class findSideLocations {};
+		class debugMarkers {};
 	};
 };

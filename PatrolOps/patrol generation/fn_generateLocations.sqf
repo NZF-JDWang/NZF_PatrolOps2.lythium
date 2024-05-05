@@ -8,7 +8,7 @@
 		NONE
 
 	Returns:
-		Nothing
+		Location Data
 
 	Examples:
 		[] call PatrolOps_fnc_generateLocations;

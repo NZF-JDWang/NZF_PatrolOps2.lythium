@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=43;
+		nextID=44;
 	};
 	class MarkerIDProvider
 	{
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=8;
+		nextID=11;
 	};
 	class Camera
 	{
@@ -30,12 +30,12 @@ binarizationWanted=0;
 sourceName="NZF_PatrolOps2";
 addons[]=
 {
-	"rhsusf_main",
-	"A3_Ui_F",
 	"A3_Modules_F_Curator_Curator",
 	"A3_Structures_F_Orange_VR_Helpers",
 	"A3_Structures_F_Civ_InfoBoards",
-	"rhsusf_c_troops"
+	"rhsusf_c_troops",
+	"rhsusf_main",
+	"A3_Ui_F"
 };
 class AddonsMetaData
 {
@@ -44,45 +44,45 @@ class AddonsMetaData
 		items=6;
 		class Item0
 		{
-			className="rhsusf_main";
-			name="rhsusf_main";
-			author="Red Hammer Studios";
-			url="http://www.rhsmods.org/";
-		};
-		class Item1
-		{
-			className="A3_Ui_F";
-			name="Arma 3 - User Interface";
-			author="Bohemia Interactive";
-			url="https://www.arma3.com";
-		};
-		class Item2
-		{
 			className="A3_Modules_F_Curator";
 			name="Arma 3 Zeus Update - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item3
+		class Item1
 		{
 			className="A3_Structures_F_Orange";
 			name="Arma 3 Orange - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item4
+		class Item2
 		{
 			className="A3_Structures_F";
 			name="Arma 3 - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
-		class Item5
+		class Item3
 		{
 			className="rhsusf_c_troops";
 			name="RHSUSF Infantry & Equipment";
 			author="Red Hammer Studios";
 			url="http://www.rhsmods.org/";
+		};
+		class Item4
+		{
+			className="rhsusf_main";
+			name="rhsusf_main";
+			author="Red Hammer Studios";
+			url="http://www.rhsmods.org/";
+		};
+		class Item5
+		{
+			className="A3_Ui_F";
+			name="Arma 3 - User Interface";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
 		};
 	};
 };
@@ -120,69 +120,8 @@ class Mission
 	};
 	class Entities
 	{
-		items=10;
+		items=4;
 		class Item0
-		{
-			dataType="Marker";
-			position[]={12373.629,32,2032.191};
-			name="patrolBase_Kinduf";
-			type="rhs_flag_USA";
-			id=0;
-			atlOffset=0.00012207031;
-		};
-		class Item1
-		{
-			dataType="Marker";
-			position[]={12237.367,341.95001,17252.787};
-			name="patrolBase_KalaeNoowi";
-			type="rhs_flag_USA";
-			id=9;
-		};
-		class Item2
-		{
-			dataType="Marker";
-			position[]={20068.928,105.461,13517.365};
-			name="patrolBase_FOBEast";
-			type="rhs_flag_USA";
-			id=10;
-			atlOffset=0.00019836426;
-		};
-		class Item3
-		{
-			dataType="Marker";
-			position[]={3852.333,672.625,17799.148};
-			name="patrolBase_Martin";
-			type="rhs_flag_USA";
-			id=11;
-			atlOffset=0.90612793;
-		};
-		class Item4
-		{
-			dataType="Marker";
-			position[]={5299.9751,296.57101,10829.908};
-			name="patrolBase_Bushlurker";
-			type="rhs_flag_USA";
-			id=12;
-		};
-		class Item5
-		{
-			dataType="Marker";
-			position[]={10881.797,41.223,7530.2979};
-			name="patrolBase_GreenCamp";
-			type="rhs_flag_USA";
-			id=13;
-			atlOffset=0.00026702881;
-		};
-		class Item6
-		{
-			dataType="Marker";
-			position[]={15849.593,28.856001,5602.561};
-			name="patrolBase_Fabiano";
-			type="rhs_flag_USA";
-			id=14;
-			atlOffset=-0.00041007996;
-		};
-		class Item7
 		{
 			dataType="Layer";
 			name="Layer 1";
@@ -258,10 +197,11 @@ class Mission
 			};
 			id=39;
 		};
-		class Item8
+		class Item1
 		{
 			dataType="Layer";
-			name="Layer 2";
+			name="Base stuff";
+			state=1;
 			class Entities
 			{
 				items=14;
@@ -846,7 +786,7 @@ class Mission
 			id=40;
 			atlOffset=55.412506;
 		};
-		class Item9
+		class Item2
 		{
 			dataType="Group";
 			side="West";
@@ -874,6 +814,78 @@ class Mission
 			{
 			};
 			id=41;
+		};
+		class Item3
+		{
+			dataType="Layer";
+			name="Patrol Base Markers";
+			class Entities
+			{
+				items=7;
+				class Item0
+				{
+					dataType="Marker";
+					position[]={5299.9751,296.57101,10829.908};
+					name="patrolBase_Bushlurker";
+					type="rhs_flag_USA";
+					id=12;
+				};
+				class Item1
+				{
+					dataType="Marker";
+					position[]={15849.593,28.856001,5602.561};
+					name="patrolBase_Fabiano";
+					type="rhs_flag_USA";
+					id=14;
+					atlOffset=-0.00041007996;
+				};
+				class Item2
+				{
+					dataType="Marker";
+					position[]={20068.928,105.461,13517.365};
+					name="patrolBase_FOBEast";
+					type="rhs_flag_USA";
+					id=10;
+					atlOffset=0.00019836426;
+				};
+				class Item3
+				{
+					dataType="Marker";
+					position[]={10881.797,41.223,7530.2979};
+					name="patrolBase_GreenCamp";
+					type="rhs_flag_USA";
+					id=13;
+					atlOffset=0.00026702881;
+				};
+				class Item4
+				{
+					dataType="Marker";
+					position[]={12237.367,341.95001,17252.787};
+					name="patrolBase_KalaeNoowi";
+					type="rhs_flag_USA";
+					id=9;
+				};
+				class Item5
+				{
+					dataType="Marker";
+					position[]={12373.629,32,2032.191};
+					name="patrolBase_Kinduf";
+					type="rhs_flag_USA";
+					id=0;
+					atlOffset=0.00012207031;
+				};
+				class Item6
+				{
+					dataType="Marker";
+					position[]={3852.333,672.625,17799.148};
+					name="patrolBase_Martin";
+					type="rhs_flag_USA";
+					id=11;
+					atlOffset=0.90612793;
+				};
+			};
+			id=43;
+			atlOffset=215.69777;
 		};
 	};
 };

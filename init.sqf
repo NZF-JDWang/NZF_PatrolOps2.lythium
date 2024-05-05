@@ -11,3 +11,5 @@ _unit addMPEventHandler ["MPKilled", {
 }];
 
 }] call CBA_fnc_addClassEventHandler;
+
+//*************************************************************** 
