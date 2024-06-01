@@ -30,9 +30,15 @@ if (count (missionNamespace getvariable "patrolOps_allRouteMarkers") > 0) then {
 	missionnamespace setvariable ["patrolOps_allRouteMarkers", nil, true];
 }; 
 
+// Delete all Debug markers
+private _debugMarkers = allMapMarkers select {_x find "debugMarker" >= 0};
+{deleteMarker _x} foreach _debugMarkers;
 
 // Delete and reset location markers 
 missionnamespace setvariable ["firstPatrolLocationData", nil, true];
 deleteMarker "firstLoc";
 
+// Delete all player vehicles
+{deletevehicle  _x} foreach patrolOps_playerInfantryVehicles;
+{deletevehicle  _x} foreach patrolOps_playerEDOVehicles;
 true;

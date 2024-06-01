@@ -12,3 +12,6 @@ missionnamespace setVariable ["RDFOpen", false, true];
 missionnamespace setvariable ["patrolOps_NZFCasualties", 0, true];
 missionnamespace setvariable ["patrolOps_allRouteMarkers", nil, true];
 missionnamespace setvariable ["patrolLength", nil, true];
+
+patrolOps_playerEDOVehicles = [];
+patrolOps_playerInfantryVehicles = [];

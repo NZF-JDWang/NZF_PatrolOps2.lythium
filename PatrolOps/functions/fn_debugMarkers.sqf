@@ -10,7 +10,7 @@
         1: Location         <POSITION> 
         2: Colour           <STRING> 
         3: Text             <STRING> 
-    4: Marker Size          <NUMBER>
+        4: Marker Size      <NUMBER>
 
     Returns:
         Nothing

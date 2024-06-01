@@ -16,9 +16,11 @@
 if (!isServer) exitWith {};
 
 // Clean up and previous patrols 
-
 private _cleanUp = [] call PatrolOps_fnc_patrolCleanUp;
 waitUntil {sleep 0.1; _cleanUp};
+
+// Count players 
+private _playerTotal = count (allPlayers - entities "HeadlessClient_F");
 
 // Get the patrol locations
 private _routeData = [] call PatrolOps_fnc_generateLocations;
@@ -69,6 +71,8 @@ waitUntil {scriptDone _inRoute};
     [], 
     2
 ] call CBA_fnc_waitAndExecute;
+
+[_playerTotal] call PatrolOps_fnc_playerVehicleSpawn;
 
 //save some data 
 missionnamespace setvariable ["secondPatrol", true, true];
