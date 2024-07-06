@@ -48,16 +48,18 @@ if (count _firstPatrolOptions < 1) then {
 
 // Encourage positions not to be on the edge of the AO
 private _firstPatrolLocData = [
-    (text _firstPatrolLoc),
+    //(text _firstPatrolLoc),
     locationPosition _firstPatrolLoc,
     (size _firstPatrolLoc select 0) * _radiusMultiplier,
     (size _firstPatrolLoc select 1) * _radiusMultiplier,
-    direction _firstPatrolLoc
+    direction _firstPatrolLoc,
+	false
 ];
 
-_firstPatrolLocData params ["_locName","_locPosition","_locRadA","_locRadB","_locDir"];
+_firstPatrolLocData params ["_locPosition","_locRadA","_locRadB","_locDir"];
 
 // Save all the data into a public variable
+missionNamespace setvariable ["firstPatrolLocationName", text _firstPatrolLoc, true];
 missionNamespace setVariable ["firstPatrolLocationData", _firstPatrolLocData, true];
 
 // Select ending Patrol base

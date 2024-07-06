@@ -23,7 +23,7 @@ private _vehSpawn = (nearestObjects [ _startingFOB, ["SignAd_Sponsor_F"],150]) s
 private _spawnDir = 180 +(getdir _vehSpawn);
 
 // spawn the EOD vehicle
-private _veh = createVehicle [selectrandom (parseSimpleArray patrolOps_EODVehicles), (_vehSpawn getRelPos [3, 90]), [], 0, "NONE"];
+private _veh = createVehicle [selectrandom (parseSimpleArray patrolOps_EODVehicles), (_vehSpawn getRelPos [4, 90]), [], 0, "NONE"];
 patrolOps_playerEDOVehicles pushback _veh;
 _veh setdir _spawnDir;
 _playerTotal = (_playerTotal - 4);

@@ -1,3 +1,5 @@
+enableSentences false;
+
 //Add eventhandler to civilians to count number of civ deaths
 ["UK3CB_TKC_C_CIV", "init", {
 params ["_unit"];
