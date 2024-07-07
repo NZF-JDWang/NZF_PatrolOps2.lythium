@@ -21,15 +21,10 @@ private _radius = sqrt(_axis^2 + _axis^2);
 private _radiusMultiplier = 0.75;
 private ["_firstPatrolLoc"];
 
-// Select starting Patrol base
-if (secondPatrol) then {
+// Get starting FOB
+private _startFOB = selectRandom patrolOps_patrolBases;
+missionNamespace setVariable ["startingFOB", _startFOB, true];
 
-	private _start = selectRandom patrolOps_patrolBases;
-	missionNamespace setVariable ["startingFOB", _start, true];
-
-};
-
-private _startFOB = missionNamespace getVariable "startingFOB";
 // Find the first patrol location
 // First get a list of options that are further than 1000m from the FOB
 private _firstPatrolLocShort = nearestLocations [getMarkerPos _startFOB, ["NameVillage", "NameCity", "NameCityCapital"], 2000];

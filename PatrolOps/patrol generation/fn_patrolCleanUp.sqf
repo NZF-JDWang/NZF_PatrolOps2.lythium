@@ -14,45 +14,45 @@
 		[] call PatrolOps_fnc_patrolCleanUp;
 */
 if (!isServer) exitwith {};
-if (!secondPatrol) exitwith {true};
 
 // Set all players back to default camouflageCoef (remove the bounty)
 {_x setUnitTrait ["camouflageCoef", 1]} foreach allPlayers;
 
-//Delete all OPFOR 
-{deletevehicle (vehicle _x)} foreach (units opfor);
-
-// Reset FOB's
-missionNamespace setVariable ["startingFOB", nil, true];
-missionNamespace setVariable ["endFOB", nil, true];
-
-// Delete all route markers
-if (count (missionNamespace getvariable "patrolOps_allRouteMarkers") > 0) then {
-
-	{deleteMarker _x} foreach patrolOps_allRouteMarkers;
-	missionnamespace setvariable ["patrolOps_allRouteMarkers", nil, true];
-}; 
-
-// Delete all Debug markers
-private _debugMarkers = allMapMarkers select {_x find "debugMarker" >= 0};
-{deleteMarker _x} foreach _debugMarkers;
-
-// Delete and reset location markers 
-missionnamespace setvariable ["firstPatrolLocationData", nil, true];
-deleteMarker "firstLoc";
-
-//deleteObjectiveMarker
-private _objectiveMarkers = allMapMarkers select {_x find "Objective" >= 0};
-{deleteMarker _x} foreach _objectiveMarkers;
-
+// Delete all mission markers
+private _allMissionMarkers = allMapMarkers - patrolOps_patrolBases;
+{deleteMarker _x} foreach _allMissionMarkers;
 
 // Delete all player vehicles
 {deletevehicle  _x} foreach patrolOps_playerInfantryVehicles;
 {deletevehicle  _x} foreach patrolOps_playerEDOVehicles;
 
+//Delete all OPFOR 
+{deletevehicle (vehicle _x)} foreach (units opfor);
+
 // Delete misc Objects 
 {deletevehicle  _x} foreach patrolOps_miscCleanUp;
 
-//reset number of kills 
+// Reset number of kills 
 missionnamespace setvariable ["patrolOps_EnemyKills", 0, true];
-true;
+
+// Reset all global variables 
+missionNamespace setvariable ["patrolDifficulty", "MEDIUM", true];
+missionnamespace setvariable ["firstPatrolLocationData", nil, true];
+missionNamespace setVariable ["startingFOB", nil, true];
+missionNamespace setVariable ["endFOB", nil, true];
+missionnamespace setVariable ["RDFOpen", false, true];
+missionnamespace setvariable ["patrolOps_NZFCasualties", 0, true];
+missionnamespace setvariable ["patrolOps_allRouteMarkers", nil, true];
+missionnamespace setvariable ["patrolLength", nil, true];
+
+patrolOps_playerEDOVehicles = [];
+patrolOps_playerInfantryVehicles = [];
+patrolOps_miscCleanUp = [];
+patrolOps_Garrisons = [];
+patrolOpsAll_Clutter = [];
+patrolOpsAll_IEDs = [];
+
+// Reset Mission Generation 
+missionnamespace setvariable ["MissionClean", true];
+missionnamespace setvariable ["routeSuccess", true];
+

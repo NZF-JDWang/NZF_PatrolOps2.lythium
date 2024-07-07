@@ -5,9 +5,11 @@ class patrolOps
 	{
 		file = "PatrolOps\patrol generation";
 		class initpatrol 				{};
+		class generatePatrol			{};
 		class generateRouteMarkers 		{};
 		class generateLocations 		{};
 		class patrolCleanUp 			{};
+		class findSideLocations 		{};
 		class routeCheck				{};
 
 	};
@@ -34,7 +36,6 @@ class patrolOps
 	{
 		file = "PatrolOps\functions";
 		class getRoadInfo 				{};
-		class findSideLocations 		{};
 		class debugMarkers 				{};
 		class vehicleInventory 			{};
 		class clearVehicleCargo 		{};

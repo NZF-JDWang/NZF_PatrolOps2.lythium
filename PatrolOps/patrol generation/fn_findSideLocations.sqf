@@ -31,7 +31,7 @@ private _onRouteLocations = [];
         // Add the _testPoint to the list of on-route locations.
         _onRouteLocations pushBackUnique _testPoint;
         // Spawn a debug marker at _testPoint with specific parameters.
-        ["selector_selectable", _testPoint, "ColorCIV", "", 1.5] spawn PatrolOps_fnc_debugMarkers;
+        ["sideLocation","selector_selectable", _testPoint, "ColorCIV", "", 1.5] call PatrolOps_fnc_debugMarkers;
     };
 } forEach _routeMarkers; // End of foreach loop for route markers.
 

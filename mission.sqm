@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=87;
+		nextID=95;
 	};
 	class Camera
 	{
-		pos[]={3807.5566,697.08392,17804.127};
-		dir[]={0.6497044,-0.64697653,0.39913103};
-		up[]={0.55126297,0.76250994,0.33865583};
-		aside[]={0.52344376,1.4901161e-008,-0.85206026};
+		pos[]={12289.777,35.515488,1995.7023};
+		dir[]={-0.073975541,-0.39068943,0.91754532};
+		up[]={-0.031396795,0.92052245,0.38942578};
+		aside[]={0.99676561,0,0.080362543};
 	};
 };
 binarizationWanted=0;
@@ -1417,6 +1417,7 @@ class Mission
 		{
 			dataType="Layer";
 			name="Base stuff";
+			state=1;
 			class Entities
 			{
 				items=28;
@@ -3264,6 +3265,7 @@ class Mission
 					};
 					id=84;
 					type="EmptyDetectorAreaR50";
+					atlOffset=-7.6293945e-006;
 				};
 				class Item7
 				{

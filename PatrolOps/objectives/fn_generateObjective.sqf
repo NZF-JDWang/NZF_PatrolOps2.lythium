@@ -15,9 +15,9 @@
 */
 
 // Select a random mission objective
-//private _missionNumbers = [1,2,3,4]; // Array containing possible mission objectives
-//private _obj1 = selectrandom _missionNumbers; // Randomly select a mission objective
-_obj1 = 3;
+private _missionNumbers = [1,2,3,4]; // Array containing possible mission objectives
+private _obj1 = selectrandom _missionNumbers; // Randomly select a mission objective
+
 private _locationData = missionNamespace getvariable "firstPatrolLocationData"; // Retrieve patrol location data
 private _locationName = missionNamespace getVariable "firstPatrolLocationName"; // Retrieve location name 
 

@@ -95,4 +95,4 @@ _workbench addEventHandler ["Explosion", {
 
 
 // Debug
-["loc_destroy", (getpos _box), "ColorOPFOR", "IED Factory", 0.5] spawn PatrolOps_fnc_debugMarkers;
+["objective","loc_destroy", (getpos _box), "ColorOPFOR", "IED Factory", 0.5] call PatrolOps_fnc_debugMarkers;

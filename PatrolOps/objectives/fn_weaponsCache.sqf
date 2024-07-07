@@ -58,4 +58,4 @@ _weaponsCache addEventHandler ["Explosion", {
 [_weaponsCache, true, [0, 2, 0], 0, true] call ace_dragging_fnc_setDraggable;
 patrolOps_miscCleanUp pushback _weaponsCache;
 
-["loc_Rifle", (getpos _weaponsCache), "ColorOPFOR", "Weapon Cache", 0.5] spawn PatrolOps_fnc_debugMarkers;
+["objective","loc_Rifle", (getpos _weaponsCache), "ColorOPFOR", "Weapon Cache", 0.5] call PatrolOps_fnc_debugMarkers;
