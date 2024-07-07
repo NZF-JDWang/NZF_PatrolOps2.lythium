@@ -17,7 +17,7 @@
         Nothing
 
     Examples:
-        [_type, _location, _colour, _text, _size] call PatrolOps_fnc_debugMarkers;
+        [_prefix, _type, _location, _colour, _text, _size] call PatrolOps_fnc_debugMarkers;
 */
 
 params ["_prefix", "_type", "_location", "_colour", "_text", "_size"]; // Declare function parameters.
@@ -34,5 +34,7 @@ if (PATROLOPS_DEBUG) then {
     _marker setMarkerTextLocal _text;
     _marker setMarkerSizeLocal [_size, _size];
     _marker setMarkerAlpha 1;
+
+    diag_log format ["%1 %2 %3 %4 %5 %6", _prefix, _type, _location, _colour, _text, _size];
 
 };

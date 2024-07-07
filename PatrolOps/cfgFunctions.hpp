@@ -16,7 +16,12 @@ class patrolOps
 	class IEDs
 	{
 		file = "PatrolOps\IEDs";
-		class findIEDLocations 			{};
+		class findPOILocations 			{};
+		class selectIEDs				{};
+		class selectIEDType				{};
+		class processIEDLocations		{};	
+		class spawnDirtRoadIED			{};
+		class spawnPavedRoadIED			{};
 
 	};
 	class effects

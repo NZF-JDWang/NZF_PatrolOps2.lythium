@@ -6,16 +6,23 @@ class patrolOps
 	{
 		file = "PatrolOps\patrol generation";
 		class initpatrol 				{};
+		class generatePatrol			{};
 		class generateRouteMarkers 		{};
 		class generateLocations 		{};
 		class patrolCleanUp 			{};
+		class findSideLocations 		{};
 		class routeCheck				{};
 
 	};
 	class IEDs
 	{
 		file = "PatrolOps\IEDs";
-		class findIEDLocations 			{};
+		class findPOILocations 			{};
+		class selectIEDs				{};
+		class selectIEDType				{};
+		class processIEDLocations		{};	
+		class spawnDirtRoadIED			{};
+		class spawnPavedRoadIED			{};
 
 	};
 	class effects
@@ -35,7 +42,6 @@ class patrolOps
 	{
 		file = "PatrolOps\functions";
 		class getRoadInfo 				{};
-		class findSideLocations 		{};
 		class debugMarkers 				{};
 		class vehicleInventory 			{};
 		class clearVehicleCargo 		{};

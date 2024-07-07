@@ -44,8 +44,6 @@ _pathAgent addEventHandler ["PathCalculated", {
         if (_routeName isEqualTo "outRoute") then {_marker setMarkerPosLocal  [getMarkerPos _marker select 0, (getMarkerPos _marker select 1)+3]};
         if (_routeName isEqualTo "inRoute") then {_marker setMarkerPosLocal  [getMarkerPos _marker select 0, (getMarkerPos _marker select 1)-3]};
 
-        
-
     } forEach (_this select 1);
     
     // Remove event handler after execution

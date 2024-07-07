@@ -64,24 +64,20 @@ if (_routeCheck) then {
     // Move all the players to the correct FOB 
     [] call PatrolOps_fnc_movePlayers;
     // Make all the route markers visible
-    [
-        {
-            private _patrolMarkers = allMapMarkers select {_x find "routeMarker" >= 0};
-            missionNamespace setVariable ["patrolOps_allRouteMarkers", _patrolMarkers, true];
-            {_x setMarkerAlpha 1} forEach patrolOps_allRouteMarkers;
-        }, 
-        [], 
-        2
-    ] call CBA_fnc_waitAndExecute;
+
+    private _patrolMarkers = allMapMarkers select {_x find "routeMarker" >= 0};
+    missionNamespace setVariable ["patrolOps_allRouteMarkers", _patrolMarkers, true];
+    {_x setMarkerAlpha 1} forEach patrolOps_allRouteMarkers;
 
     // Find any locations the patrol route passes by 
     [
         {
-        [] call PatrolOps_fnc_findSideLocations;
+        [] spawn PatrolOps_fnc_findSideLocations;
         }, 
         [], 
-        2
+        3
     ] call CBA_fnc_waitAndExecute;
+  
 
     // Spawn player vehicles
     [_playerTotal] call PatrolOps_fnc_playerVehicleSpawn;
@@ -89,14 +85,23 @@ if (_routeCheck) then {
     // Generate Objective
     [] call PatrolOps_fnc_generateObjective;
 
-    // Generate potential IED locations 
+    // Generate potential POI locations to spawn IED's and clutter then spawn them
     [
         {
-        [] spawn PatrolOps_fnc_findIEDLocations;
+        [] call PatrolOps_fnc_findPOILocations;
         }, 
         [], 
         1
     ] call CBA_fnc_waitAndExecute;
+
+        [
+        {
+        [] call PatrolOps_fnc_selectIEDs;
+        }, 
+        [], 
+        2
+    ] call CBA_fnc_waitAndExecute;
+   
 
     missionNamespace setVariable ["regen", 0];
     // Fade back in 
