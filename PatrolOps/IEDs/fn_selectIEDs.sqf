@@ -15,22 +15,15 @@
 */
 
 // Get patrol IED level 
-private ["_numberOfIEDs"];
-private _patrolDifficulty = missionNamespace getvariable "patrolDifficulty";
-
-switch (_patrolDifficulty) do {
-
-	case "LOW": {_numberOfIEDs = random [2,3,3]};
-
-	case "MEDIUM": {_numberOfIEDs = random [4,4,5]};
-
-	case "HIGH": {_numberOfIEDs = random [5,6,7]};
-};
+private ["_numberOfOutIEDs", "_numberOfInIEDs"];
 
 // Setup all possible locations into 2 arrays 
 private _locationsOut = allMapMarkers select {_x find "debugPotentialIED_out" >= 0};
 private _locationsIn = allMapMarkers select {_x find "debugPotentialIED_in" >= 0};
 
-[_locationsOut, _numberOfIEDs] call PatrolOps_fnc_processIEDLocations;
-[_locationsIn, _numberOfIEDs] call PatrolOps_fnc_processIEDLocations;
+_numberOfOutIEDs = [] call PatrolOps_fnc_getNumberOfIEDs;
+_numberOfInIEDs = [] call PatrolOps_fnc_getNumberOfIEDs;
+
+[_locationsOut, _numberOfOutIEDs] call PatrolOps_fnc_processIEDLocations;
+[_locationsIn, _numberOfInIEDs] call PatrolOps_fnc_processIEDLocations; 
 

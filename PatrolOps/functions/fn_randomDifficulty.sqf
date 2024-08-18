@@ -16,9 +16,9 @@
 
 // Define the probabilities for each difficulty level
 
-private _probabilityLow = 0.2;   // 20% chance for "low"
-private _probabilityMedium = 0.5; // 50% chance for "medium"
-private _probabilityHigh = 0.3;   // 30% chance for "high"
+private _probabilityLow = 0.2;   	// 20% chance for "low"
+private _probabilityMedium = 0.7; 	// 50% chance for "medium"
+									// 30% chance for "high"
 
 // Generate a random number between 0 and 1
 private _randomNumber = random 1;
@@ -30,7 +30,7 @@ if (_randomNumber <= _probabilityLow) then {
 
 } else {
 
-	if ((_randomNumber > _probabilityLow) AND (_randomNumber < _probabilityMedium)) then {
+	if ((_randomNumber > _probabilityLow) AND (_randomNumber <= _probabilityMedium)) then {
 		//Medium difficulty
 		missionNamespace setvariable ["patrolDifficulty", "MEDIUM", true];
 

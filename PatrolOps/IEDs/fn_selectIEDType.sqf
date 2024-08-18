@@ -29,15 +29,11 @@ if (_roadType isEqualTo "MAIN ROAD" || _roadType isEqualTo "ROAD" || _texture is
 	// NOTHING - some sort of clutter 
 	_selection = floor (random 10) +1;
 
-	if (_selection == 1) then {
-		// 10% Chance 
-		_typeIED = "NOTHING";
-	}; 
-	if (_selection > 1 && _selection < 6) then {
+	if (_selection < 5) then {
 		// 40% Chance
 		_typeIED = "CAR";
 	};
-		if (_selection > 5) then {
+		if (_selection > 4) then {
 		// 50% Chance
 		_typeIED = "TRASHPILE";
 	};
@@ -47,16 +43,13 @@ if (_roadType isEqualTo "MAIN ROAD" || _roadType isEqualTo "ROAD" || _texture is
 	// If it's a dirt road then the IED's can be either under cars in trash piles or buried 
 	// NOTHING - some sort of clutter 
 	_selection = floor (random 10) +1;
-	if (_selection == 1) then {
-		// 10% Chance 
-		_typeIED = "NOTHING";
-	}; 
-	if (_selection > 1 && _selection < 4) then {
+
+	if (_selection < 3) then {
 		// 20% Chance
 		_typeIED = "CAR";
 	};
-	if (_selection > 3 && _selection < 6) then {
-		// 20% Chance
+	if (_selection > 2 && _selection < 6) then {
+		// 30% Chance
 		_typeIED = "TRASHPILE";
 	};
 	if (_selection > 5) then {

@@ -53,7 +53,7 @@
 	"EDITBOX",
 	["Clutter Objects for dirt roads","Classnames of objects to appear on dirt roads"],
 	["Patrol Operations", "IED Clutter"],
-	"Land_dirt_road_damage_long_02_F,Land_dirt_road_damage_long_03_F,Land_dirt_road_damage_long_04_F,Land_dirt_road_damage_long_05_F,Land_dirt_road_damage_long_02_F,Land_dirt_road_damage_long_03_F,Land_dirt_road_damage_long_04_F,Land_dirt_road_damage_long_05_F,Land_dirt_road_rocks_01_F,Land_dirt_road_rocks_02_F,Land_dirt_road_rocks_03_F,Land_dirt_road_rocks_04_F,Land_Decal_RoadEdge_Dirt_01_F,Land_Decal_RoadEdge_Dirt_02_F,Land_Decal_RoadEdge_Dirt_06_F,Land_Decal_RoadEdge_Dirt_07_F,Land_Decal_RoadEdge_Dirt_09_F",
+	"Land_dirt_road_damage_long_02_F, Land_dirt_road_damage_long_03_F, Land_dirt_road_damage_long_04_F, Land_dirt_road_damage_long_05_F, Land_dirt_road_rocks_01_F, Land_dirt_road_rocks_02_F, Land_Decal_RoadEdge_Dirt_01_F, Land_Decal_RoadEdge_Dirt_02_F, Land_Decal_RoadEdge_Dirt_06_F, Land_Decal_RoadEdge_Dirt_07_F, Land_Decal_RoadEdge_Dirt_09_F",
 	nil,
 	{}
 ] call CBA_Settings_fnc_init;
@@ -61,9 +61,9 @@
 [
 	"patrolOpsRoadClutter",
 	"EDITBOX",
-	["Clutter Objects for paved roads", "Classnames of objects to appear on paved roads"],
+	["Clutter Objects for roads", "Classnames of objects to appear on roads"],
 	["Patrol Operations", "IED Clutter"],
-	"Land_GarbageBags_F,Land_GarbagePallet_F,Land_GarbageWashingMachine_F,Land_GarbageBags_F,Land_GarbagePallet_F,Land_GarbageWashingMachine_F,Land_GarbageBags_F,Land_GarbagePallet_F,Land_GarbageWashingMachine_F,Land_Tyres_F,Land_JunkPile_F,Land_tires_EP1,Land_GarbageBags_F,Land_Sacks_goods_F,Land_Sacks_heap_F,Land_CanisterPlastic_F,Land_BarrelEmpty_grey_F,Land_BarrelEmpty_F,Land_BarrelSand_F,Land_BarrelSand_grey_F,Land_CinderBlock_01_F,Land_GarbageBarrel_01_F,Land_GarbageBarrel_01_english_F,Land_CanisterFuel_F,Land_CanisterFuel_Blue_F,Land_CanisterFuel_Red_F,Land_CanisterFuel_White_F,Land_PaperBox_01_small_ransacked_brown_F,Land_CratesPlastic_F,Land_WoodenCrate_01_F",
+	"Land_GarbageBags_F, Land_GarbageBags_F, Land_GarbageBags_F, Land_GarbageBags_F, Land_GarbageBags_F, Land_GarbageBags_F, Land_GarbagePallet_F, Land_GarbageWashingMachine_F, Land_Tyres_F, Land_JunkPile_F, Land_tires_EP1, Land_Sacks_goods_F, Land_Sacks_heap_F, Land_CanisterPlastic_F, Land_BarrelEmpty_grey_F, Land_BarrelEmpty_F, Land_BarrelSand_F, Land_BarrelSand_grey_F, Land_CinderBlock_01_F, Land_GarbageBarrel_01_F, Land_GarbageBarrel_01_english_F, Land_CanisterFuel_F, Land_CanisterFuel_Blue_F, Land_CanisterFuel_Red_F, Land_CanisterFuel_White_F, Land_PaperBox_01_small_ransacked_brown_F, Land_CratesPlastic_F, Land_WoodenCrate_01_F",
 	nil,
 	{}
 ] call CBA_Settings_fnc_init;

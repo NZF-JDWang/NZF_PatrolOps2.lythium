@@ -19,10 +19,15 @@ class patrolOps
 		file = "PatrolOps\IEDs";
 		class findPOILocations 			{};
 		class selectIEDs				{};
+		class getNumberofIEDs			{};
 		class selectIEDType				{};
 		class processIEDLocations		{};	
-		class spawnDirtRoadIED			{};
-		class spawnPavedRoadIED			{};
+		class configureDirtRoadIED		{};
+		class configurePavedRoadIED		{};
+		class spawnDirtClutter			{};
+		class spawnTrashClutter			{};
+		class spawnBuriedIED			{};
+		class dig						{};
 
 	};
 	class effects

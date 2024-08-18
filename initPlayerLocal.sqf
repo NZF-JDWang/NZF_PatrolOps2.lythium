@@ -60,6 +60,7 @@ player setVariable ["Joined", true, true];
 
 [player] call PatrolOps_fnc_unconscious;
 //*************************************************************************************
+/*
 //Add ACE interaction to dig up IEDs
 _action = ["digIED","Dig For IED","",{_player remoteExec ["PatrolOps_fnc_dig",0,true];},{"ACE_EntrenchingTool" in (items _player)},{},[],[],0.5] call ace_interact_menu_fnc_createAction;   
 ["Sign_Sphere10cm_F", 0, ["ACE_MainActions"], _action] call ace_interact_menu_fnc_addActionToClass;

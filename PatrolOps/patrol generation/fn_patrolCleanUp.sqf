@@ -29,8 +29,10 @@ private _allMissionMarkers = allMapMarkers - patrolOps_patrolBases;
 //Delete all OPFOR 
 {deletevehicle (vehicle _x)} foreach (units opfor);
 
-// Delete misc Objects 
+// Delete misc Objects and IED's
 {deletevehicle  _x} foreach patrolOps_miscCleanUp;
+{deletevehicle  _x} foreach patrolOpsAll_Clutter;
+{deletevehicle  _x} foreach patrolOpsAll_IEDs;
 
 // Reset number of kills 
 missionnamespace setvariable ["patrolOps_EnemyKills", 0, true];
@@ -51,6 +53,7 @@ patrolOps_miscCleanUp = [];
 patrolOps_Garrisons = [];
 patrolOpsAll_Clutter = [];
 patrolOpsAll_IEDs = [];
+patrolOps_IEDHelpers = [];
 
 // Reset Mission Generation 
 missionnamespace setvariable ["MissionClean", true];
