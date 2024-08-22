@@ -12,24 +12,19 @@
 		NONE
 
 	Examples:
-		[_iedType, _locationIED] call PatrolOps_fnc_spawnPavedRoasIED;
+		[_iedType, _locationIED] call PatrolOps_fnc_spawnPavedRoadIED;
 */
 // Extract parameters for IED type and location
-params ["_iedType","_locationIED","_ied","_bombObj"];
+params ["_iedType","_locationIED"];
 
 // Exit if not running on the server
 if (!isServer) exitwith {};
 
 // Define private variables
-private ["_difficultyLevel"];
+private ["_difficultyLevel","_ied","_bombObj"];
 private _patrolDifficulty = missionnamespace getVariable "patrolDifficulty";
 
-// Determine difficulty level based on patrol difficulty
-switch (_patrolDifficulty) do {
-    case "LOW": {_difficultyLevel = 75}; 
-    case "MEDIUM": {_difficultyLevel = 85}; 
-    case "HIGH": {_difficultyLevel = 95}; 
-};
+_difficultyLevel = 75;
 
 // Random chance to skip IED placement based on difficulty
 if (random 100 > _difficultyLevel) exitwith {
@@ -38,9 +33,27 @@ if (random 100 > _difficultyLevel) exitwith {
 
 };
 
+if (_iedType == "CAR") then {
+    // For under vehicle IED's 
+    private _water = getposATL nearestObject [_locationIED, "WaterSpill_01_Medium_Old_F"];
+    _bombObj = createVehicle ["iedd_ied_Cinder", _water, [], 0.25, "CAN_COLLIDE"];
+    _bombObj enableSimulationGlobal false;
+    _bombObj setVectorDirAndUp [[0,1,0],[1,0,0]];
+    _bombObj setVariable ["iedd_ied_variation",5]; // Random variation
+    _bombObj setVariable ["iedd_ied_decals",false]; // No decals
+    _bombObj setVariable ["iedd_ied_dir",false]; // Fixed direction
+    _bombObj setVariable ["iedd_ied_dud",2]; // 2% chance to dud
+    _bombObj setVariable ["iedd_ied_size",4]; // Large explosion size
+    
+    patrolOpsAll_IEDs pushback _bombObj;
 
-// If IED type is TRASHPILE
-if (_iedType == "TRASHPILE") then {
+    _bombObj enableSimulationGlobal true;
+
+	// Marker for debug 
+	["IED", "loc_destroy", (getpos _bombObj), "ColorRed", "IED", 1] call PatrolOps_fnc_debugMarkers;
+
+} else {
+
     // Select random IED class
     _iedClass = selectRandom ["iedd_ied_CanisterPlastic","iedd_ied_CanisterFuel","iedd_ied_Cardboard","iedd_ied_Cinder","iedd_ied_Metal","iedd_ied_Barrel"];
 
@@ -70,7 +83,7 @@ if (_iedType == "TRASHPILE") then {
     // Special case for fuel canister IED
     if (_iedType isEqualTo "iedd_ied_CanisterFuel") then {
         _ied setVariable ["iedd_ied_color","random"];
-    };
+    }; 
 
     // Set IED properties
     _ied setVariable ["iedd_ied_variation",5]; // Random variation
@@ -87,23 +100,6 @@ if (_iedType == "TRASHPILE") then {
     _ied enableSimulationGlobal true;
 
 
-} else {
-    // For under vehicle IED's 
-    private _water = getposATL nearestObject [_locationIED, "WaterSpill_01_Medium_Old_F"];
-    _bombObj = createVehicle ["iedd_ied_Cinder", _water, [], 0.25, "CAN_COLLIDE"];
-    _bombObj enableSimulationGlobal false;
-    _bombObj setVectorDirAndUp [[0,1,0],[1,0,0]];
-    _bombObj setVariable ["iedd_ied_variation",5]; // Random variation
-    _bombObj setVariable ["iedd_ied_decals",false]; // No decals
-    _bombObj setVariable ["iedd_ied_dir",false]; // Fixed direction
-    _bombObj setVariable ["iedd_ied_dud",2]; // 2% chance to dud
-    _bombObj setVariable ["iedd_ied_size",4]; // Large explosion size
-    
-    patrolOpsAll_IEDs pushback _bombObj;
-
-    _bombObj enableSimulationGlobal true;
-
-	// Marker for debug 
-	["IED", "loc_destroy", (getpos _bombObj), "ColorRed", "IED", 1] call PatrolOps_fnc_debugMarkers;
 };
+
 

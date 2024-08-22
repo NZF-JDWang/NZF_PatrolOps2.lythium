@@ -53,7 +53,10 @@ class patrolOps
 		class findRandomBuilding			{};
 		class setMissionTime 				{};
 		class movePlayers					{};
-		class PatrolOps_fnc_getObjectSize 	{};
+		class getObjectSize 				{};
+		class timeCycle						{};
+		class revealMines					{};
+		class checkOverlap					{};
 
 	};
 	class objectives

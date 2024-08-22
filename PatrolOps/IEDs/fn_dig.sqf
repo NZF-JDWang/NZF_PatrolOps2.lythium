@@ -14,12 +14,15 @@
 		[_player] call PatrolOps_fnc_dig;
 */
 
-params ["_player","_ied"];
+params ["_player","_helper"];
+
+_ied = _helper getVariable "attachedIED";
 
 _digtime = 10;
+deleteVehicle _helper;
 
-for "_i" from 1 to _digtime do {
-	_ied setpos [getPos _ied select 0, getPos _ied select 1, (getPos _ied select 2) + 0.02];
+for "_i" from 1 to (_digtime-1) do {
+	_ied setpos [getPos _ied select 0, getPos _ied select 1, (getPos _ied select 2) + 0.04];
 	[_ied, _player] call grad_trenches_functions_fnc_playSound;
 	sleep 1;
 };

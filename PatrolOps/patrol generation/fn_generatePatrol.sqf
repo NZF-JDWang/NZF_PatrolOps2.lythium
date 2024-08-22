@@ -107,6 +107,8 @@ if (_routeCheck) then {
     // Fade back in 
     [1, "BLACK", 3, 1] remoteExec ["BIS_fnc_fadeEffect"];
 
+    [] spawn PatrolOps_fnc_revealMines;
+     
     // Drop some information into the logs for debug purpose
     diag_log "*******************************************************************************";
     diag_log "[NZF PATROL OPS] - Patrol Route Created";

@@ -43,7 +43,6 @@ for "_i" from 0 to _repeat step _spacing do {
         [_iedType, _locationIED] call PatrolOps_fnc_configureDirtRoadIED;
         [_iedType, _locationIED] call PatrolOps_fnc_spawnDirtRoadIED;
 
-
     };
 };
 

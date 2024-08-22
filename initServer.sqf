@@ -1,3 +1,8 @@
+//Initialize player groups (U - menu)
+["Initialize", [true]] call BIS_fnc_dynamicGroups;
+
+[] spawn PatrolOps_fnc_timeCycle;
+
 execVM "PatrolOps\scripts\patrolOps_config.sqf";
 
 // Get base locations

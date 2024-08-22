@@ -1,88 +1,102 @@
 /*
-	Author: JD Wang
+    Author: JD Wang, Edited by Grok 2
 
-	Description:
-		Spawn Paved Road IED 
+    Description:
+        Configures Paved Road IED with reduced risk of GIAR errors.
 
-	Parameter(s):
-		0: IED Type <CLASSNAME>
+    Parameters:
+        0: IED Type <STRING>
+        1: Location <ARRAY>
 
-	Returns:
-		NONE
+    Returns:
+        NONE
 
-	Examples:
-		[_iedType, _locationIED] call PatrolOps_fnc_spawnPavedRoadIED;
+    Examples:
+        ["CAR", [100,100,0]] call PatrolOps_fnc_configurePavedRoadIED;
 */
 
 params ["_iedType", "_locationIED"];
 
-// IED types can be "CAR", or "TRASHPILE"
 switch (_iedType) do {
+    case "CAR": {
+        // Filter out specific car types that should not be used for IEDs
+        private _allCars = parseSimpleArray grad_civs_cars_vehicles - ["UK3CB_TKC_C_YAVA","UK3CB_TKC_C_TT650"];
+        
+        // Find the nearest road within 50 meters of the specified location
+        private _road = [_locationIED, 50] call BIS_fnc_nearestRoad;
+        
+        // Retrieve detailed information about the road
+        private _roadInfo = [_road] call PatrolOps_fnc_getRoadInfo;
+        _roadInfo params ["_roadType","_roadWidth","_roadDir", "_texture"];
 
+        // Randomly select a car type and position it near the road
+        private _wreckType = selectRandom _allCars;
+        private _wreckPos = _road getRelPos [(_roadWidth/2) + (random 2) + 1, selectRandom [90,270]];
+        private _wreck = createVehicle [_wreckType, _wreckPos, [], 0, "NONE"];
+        _wreck setDir random 360;  // Set a random direction for the wreck
+        patrolOps_miscCleanUp pushBack _wreck;  // Add to cleanup list
 
-	case "CAR": {
-		// Get list of cars
-		private _allCars = parseSimpleArray grad_civs_cars_vehicles;
-		_allCars = _allCars - ["UK3CB_TKC_C_YAVA","UK3CB_TKC_C_TT650"];
+        // Randomly damage some wheels of the car
+        private _wheels = ["wheel_1_1_steering", "wheel_1_2_steering", "wheel_2_1_steering", "wheel_2_2_steering"];
+        _wheels resize ((ceil (random 2))+(floor (random 2)));  // Randomly select number of wheels to damage
+        {_wreck setHit [_x, 1];} forEach _wheels;  // Set damage to 1 (fully destroyed)
 
-		//Get road information
-		private _road = [_locationIED, 20] call BIS_fnc_nearestRoad;
-		private _roadInfo = [_road] call PatrolOps_fnc_getRoadInfo;
-		_roadInfo params ["_roadType","_roadWidth","_roadDir", "_texture"];
+        // Add a water spill effect near the wreck for realism
+        private _water = createVehicle ["WaterSpill_01_Medium_Old_F", _wreck getRelPos [1, 180], [], 0, "CAN_COLLIDE"];
+        _water setVectorUp surfaceNormal (getPosATL _water);  // Align water with terrain
+        patrolOps_miscCleanUp pushBack _water;  // Add water spill to cleanup list
 
-		//spawn the wreck
-		private _wreckType = selectrandom _allCars;
-		private _wreck = createVehicle [_wreckType, (_road getRelPos [((_roadWidth/2) + (random 2) + 1), selectRandom [90,270]]), [], 0, "NONE"];
-		_wreck setdir random 360;
-		patrolOps_miscCleanUp pushback _wreck;
-
-		//damage random wheels on the vehicle
-		private _wheels = ["wheel_1_1_steering", "wheel_1_2_steering", "wheel_2_1_steering", "wheel_2_2_steering"];
-		_wheels resize ((ceil (random 2))+(floor (random 2)));
-		{_wreck sethit [_x, 1];} foreach _wheels;
-
-		//now add some water to the ground 
-		private _water = createVehicle ["WaterSpill_01_Medium_Old_F", (_wreck getRelPos [1, 180]), [], 0, "CAN_COLLIDE"];
-		_water setVectorUp surfaceNormal (getposATL _water);
-		patrolOps_miscCleanUp pushback _water;
-
-	};
+		// Add chance of garbage
+		if (floor (random 4) > 1) then {
+			_garbageType = selectrandom ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
+			private _garbage = createVehicle [_garbageType, (getpos _water), [], ((random 1.5)+ 0.5), "CAN_COLLIDE"];
+			_garbage setdir (random 360);
+			_garbage setVectorUp surfaceNormal (getposATL _garbage);
+			_garbage enableSimulationGlobal false;
+			patrolOps_miscCleanUp pushback _garbage;
+		};
+    };
 
 	case "TRASHPILE": {
-		// Get list of trash objects
 		private _allTrash = parseSimpleArray patrolOpsRoadClutter;
-		private _trashTypes = _allTrash apply {[_x, _x call PatrolOps_fnc_getObjectSize]};
-		_trashTypes = _trashTypes select {_x # 1 > 0}; // Filter out objects with zero or negative size
+		private _trashTypes = _allTrash apply {[_x, _x call PatrolOps_fnc_getObjectSize]} select {_x # 1 > 0};
+		_trashTypes sort false;
 
-		// Sort trash by size for better placement
-		_trashTypes sort false; // Sort in descending order
-
-		// Define the central position
 		private _centralPosition = _locationIED;
-
-		// Calculate the number of trash items (1 to 3)
 		private _numTrash = floor random 3 + 1;
+		
+		// Find the maximum size
+		private _maxSize = 0;
+		{
+			if (_x # 1 > _maxSize) then {
+				_maxSize = _x # 1;
+			};
+		} forEach _trashTypes;
+		
+		private _separationDistance = _maxSize * 1.1;
 
-		// Calculate positions for trash items
 		private _positions = [];
 		private _angleIncrement = 360 / _numTrash;
-		private _maxSize = _trashTypes # 0 # 1; // Largest trash item size
-		private _separationDistance = _maxSize * 1.1; // 10% extra to ensure no touching
-
 		for "_i" from 0 to (_numTrash - 1) do {
 			private _angle = _angleIncrement * _i;
-			private _position = _centralPosition getPos [_separationDistance, _angle];
-			_positions pushBack _position;
+			private _distance = _separationDistance + (random 1);
+			private _pos = _centralPosition getPos [_distance, _angle];
+			while {[_pos, _trashTypes # _i # 1, _positions] call _checkOverlap} do {
+				_angle = _angle + (random 10) - 5;
+				_pos = _centralPosition getPos [_distance, _angle];
+			};
+			_positions pushBack _pos;
 		};
 
-		// Spawn the trash items
 		for "_i" from 0 to (_numTrash - 1) do {
-			private _trashType = _trashTypes # _i # 0;
-			private _trashpile = createVehicle [_trashType, _positions # _i, [], 0, "CAN_COLLIDE"];
-			_trashpile setDir random 360;
-			_trashpile setVectorUp surfaceNormal (getPosATL _trashpile);
-			patrolOps_miscCleanUp pushBack _trashpile;
-			_trashpile enableSimulationGlobal false;
+			[{
+				params ["_trashType", "_position"];
+				private _trashpile = createVehicle [_trashType, _position, [], 0, "CAN_COLLIDE"];
+				_trashpile setDir random 360;
+				_trashpile setVectorUp surfaceNormal (getPosATL _trashpile);
+				patrolOps_miscCleanUp pushBack _trashpile;
+				_trashpile enableSimulationGlobal false;
+			}, [_trashTypes # _i # 0, _positions # _i], _i * 0.2] call CBA_fnc_waitAndExecute;
 		};
 	};
 };

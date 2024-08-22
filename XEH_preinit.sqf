@@ -53,7 +53,7 @@
 	"EDITBOX",
 	["Clutter Objects for dirt roads","Classnames of objects to appear on dirt roads"],
 	["Patrol Operations", "IED Clutter"],
-	"Land_dirt_road_damage_long_02_F, Land_dirt_road_damage_long_03_F, Land_dirt_road_damage_long_04_F, Land_dirt_road_damage_long_05_F, Land_dirt_road_rocks_01_F, Land_dirt_road_rocks_02_F, Land_Decal_RoadEdge_Dirt_01_F, Land_Decal_RoadEdge_Dirt_02_F, Land_Decal_RoadEdge_Dirt_06_F, Land_Decal_RoadEdge_Dirt_07_F, Land_Decal_RoadEdge_Dirt_09_F",
+	"Land_dirt_road_damage_long_02_F, Land_dirt_road_damage_long_03_F, Land_dirt_road_damage_long_04_F, Land_dirt_road_damage_long_05_F, Land_dirt_road_rocks_01_F, Land_dirt_road_rocks_02_F, Land_Decal_RoadEdge_Dirt_02_F, Land_Decal_RoadEdge_Dirt_06_F, Land_Decal_RoadEdge_Dirt_07_F, Land_Decal_RoadEdge_Dirt_09_F",
 	nil,
 	{}
 ] call CBA_Settings_fnc_init;

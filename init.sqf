@@ -11,7 +11,6 @@ _unit addMPEventHandler ["MPKilled", {
 		missionnamespace setvariable ["patrolOps_CivilianKills", _kills, true];
 	};
 }];
-
 }] call CBA_fnc_addClassEventHandler;
 
 //*************************************************************** 

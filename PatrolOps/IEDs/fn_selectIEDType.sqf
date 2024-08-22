@@ -17,7 +17,7 @@
 params ["_location"];
 
 // Get road info for the location 
-private _road = [_location, 25] call BIS_fnc_nearestRoad;
+private _road = [_location, 50] call BIS_fnc_nearestRoad;
 private _roadInfo = [_road] call PatrolOps_fnc_getRoadInfo;
 _roadInfo params ["_roadType","_roadWidth","_roadDir", "_texture"];
 

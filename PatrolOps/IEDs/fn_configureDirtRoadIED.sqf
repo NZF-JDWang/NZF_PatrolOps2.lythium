@@ -2,7 +2,7 @@
 	Author: JD Wang
 
 	Description:
-		Spawn Dirt Road IED 
+		Configure Dirt Road IED 
 
 	Parameter(s):
 		0: IED Type <CLASSNAME>
@@ -11,7 +11,7 @@
 		NONE
 
 	Examples:
-		[_iedType, _locationIED] call PatrolOps_fnc_spawnDirtRoadIED;
+		[_iedType, _locationIED] call PatrolOps_fnc_configureDirtRoadIED;
 */
 
 params ["_iedType", "_locationIED"];
@@ -27,7 +27,7 @@ switch (_iedType) do {
 		_allCars = _allCars - ["UK3CB_TKC_C_YAVA","UK3CB_TKC_C_TT650"];
 
 		//Get road information
-		private _road = [_locationIED, 20] call BIS_fnc_nearestRoad;
+		private _road = [_locationIED, 50] call BIS_fnc_nearestRoad;
 		private _roadInfo = [_road] call PatrolOps_fnc_getRoadInfo;
 		_roadInfo params ["_roadType","_roadWidth","_roadDir", "_texture"];
 
@@ -46,6 +46,16 @@ switch (_iedType) do {
 		private _water = createVehicle ["WaterSpill_01_Medium_Old_F", (_wreck getRelPos [1, 180]), [], 0, "CAN_COLLIDE"];
 		_water setVectorUp surfaceNormal (getposATL _water);
 		patrolOps_miscCleanUp pushback _water;
+	
+		// Add chance of garbage
+		if (floor (random 4) > 1) then {
+			_garbageType = selectrandom ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
+			private _garbage = createVehicle [_garbageType, (getpos _water), [], ((random 1.5)+ 0.5), "CAN_COLLIDE"];
+			_garbage setdir (random 360);
+			_garbage setVectorUp surfaceNormal (getposATL _garbage);
+			_garbage enableSimulationGlobal false;
+			patrolOps_miscCleanUp pushback _garbage;
+		};
 
 
 	};
@@ -66,6 +76,16 @@ switch (_iedType) do {
 
 			_trashpile enableSimulationGlobal false;
 
+			// Add chance of garbage
+			if (floor (random 4) > 1) then {
+				_garbageType = selectrandom ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
+				private _garbage = createVehicle [_garbageType, (getpos _trashpile), [], ((random 1.5)+ 0.5), "CAN_COLLIDE"];
+				_garbage setdir (random 360);
+				_garbage setVectorUp surfaceNormal (getposATL _garbage);
+				_garbage enableSimulationGlobal false;
+				patrolOps_miscCleanUp pushback _garbage;
+			};
+
 		};
 	};
 
@@ -76,7 +96,7 @@ switch (_iedType) do {
 		private _dirtType = selectRandom _allDirtObjects;
 
 		//Get road information
-		private _road = [_locationIED, 20] call BIS_fnc_nearestRoad;
+		private _road = [_locationIED, 50] call BIS_fnc_nearestRoad;
 		private _roadInfo = [_road] call PatrolOps_fnc_getRoadInfo;
 		_roadInfo params ["_roadType","_roadWidth","_roadDir", "_texture"];
 
@@ -86,6 +106,15 @@ switch (_iedType) do {
 		_dirtpile setVectorUp surfaceNormal (getposATL _dirtpile);
 		patrolOps_miscCleanUp pushback _dirtpile;
 
+		// Add chance of garbage
+		if (floor (random 10) > 3) then {
+			_garbageType = selectrandom ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
+			private _garbage = createVehicle [_garbageType, (getpos _dirtpile), [], ((random 1.5)+ 0.5), "CAN_COLLIDE"];
+			_garbage setdir (random 360);
+			_garbage setVectorUp surfaceNormal (getposATL _garbage);
+			_garbage enableSimulationGlobal false;
+			patrolOps_miscCleanUp pushback _garbage;
+		};
 
 	};
 };

@@ -8,7 +8,7 @@
     Parameter(s):
         0: Marker name      <STRING>
         1: Type of Marker   <STRING> 
-        2: Location         <POSITION> 
+        2: Location         <ARRAY> 
         3: Colour           <STRING> 
         4: Text             <STRING> 
         5: Marker Size      <NUMBER>
@@ -37,6 +37,6 @@ if (PATROLOPS_DEBUG) then {
     _marker setMarkerSizeLocal [_size, _size];
     _marker setMarkerAlpha 1;
 
-    diag_log format ["%1 %2 %3 %4 %5 %6", _prefix, _type, _location, _colour, _text, _size];
+    diag_log format ["%1 %2 %3 %4 %5", _prefix, _type, _location, _colour, _text];
 
 };
