@@ -86,7 +86,7 @@ if ((floor random 10) > 3) then {
 	private _iedtype = selectRandom ["ACE_IEDLandBig_Range_Ammo","ACE_IEDLandBig_Range_Ammo","ACE_IEDLandSmall_Range_Ammo"];
 	_ied = createVehicle [_iedtype, _pos, [], 2, "CAN_COLLIDE"];
 	_ied setVectorUp surfaceNormal (getpos _ied);
-	patrolOpsAll_IEDs pushback _ied;
+	patrolOps_allIEDs pushback _ied;
 
 	// Add eventhandler to increase IED explosion effects 
 	/*
@@ -101,7 +101,7 @@ if ((floor random 10) > 3) then {
 
 	_iedCover = createVehicle ["Land_Decal_roads_oil_stain_01_F", getpos _ied, [], 0, "CAN_COLLIDE"];
 	_iedCover setVectorUp surfaceNormal (getposATL _iedCover);
-	patrolOpsAll_Clutter pushBack _iedCover;
+	patrolOps_allClutter pushBack _iedCover;
 
 	_coverHelper = createVehicle ["Sign_Sphere10cm_F", getpos _iedCover, [], 0, "CAN_COLLIDE"];
 	_coverHelper setObjectTextureGlobal [0, "#(argb,8,8,3)color(0,0,0,0,CA)"];

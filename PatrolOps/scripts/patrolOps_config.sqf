@@ -21,8 +21,8 @@ patrolOps_playerEDOVehicles = [];
 patrolOps_playerInfantryVehicles = [];
 patrolOps_miscCleanUp = [];
 patrolOps_Garrisons = [];
-patrolOpsAll_Clutter = [];
-patrolOpsAll_IEDs = [];
+patrolOps_allClutter = [];
+patrolOps_allIEDs = [];
 patrolOps_IEDHelpers = [];
 
 patrolOpsBadBuildings = [

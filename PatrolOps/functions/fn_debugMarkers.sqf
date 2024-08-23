@@ -22,7 +22,14 @@
         https://community.bistudio.com/wiki/Arma_3:_CfgMarkers
 */
 
-params ["_prefix", "_type", "_location", "_colour", "_text", "_size"]; // Declare function parameters.
+params [
+    ["_prefix", "", [""]],
+    ["_type", "", [""]],
+    ["_location", [0,0,0], [[]]],
+    ["_colour", "", [""]],
+    ["_text", "", [""]],
+    ["_size", 1, [0]]
+];
 
 // Check if debug mode is enabled.
 if (PATROLOPS_DEBUG) then {

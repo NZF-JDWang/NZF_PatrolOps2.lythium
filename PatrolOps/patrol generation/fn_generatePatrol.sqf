@@ -94,18 +94,26 @@ if (_routeCheck) then {
         1
     ] call CBA_fnc_waitAndExecute;
 
-        [
+    [
         {
         [] call PatrolOps_fnc_selectIEDs;
         }, 
         [], 
         2
     ] call CBA_fnc_waitAndExecute;
-   
 
     missionNamespace setVariable ["regen", 0];
     // Fade back in 
     [1, "BLACK", 3, 1] remoteExec ["BIS_fnc_fadeEffect"];
+
+    // Ambush Locations
+    [
+        {
+        [] call PatrolOps_fnc_iedAmbush;
+        }, 
+        [], 
+        2
+    ] call CBA_fnc_waitAndExecute;
 
     [] spawn PatrolOps_fnc_revealMines;
      

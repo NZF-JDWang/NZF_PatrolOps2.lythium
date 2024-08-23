@@ -13,7 +13,7 @@
 	"EDITBOX",
 	["Insurgent Vests", "Classnames for Insurgent vests"],
 	["Patrol Operations", "Insurgent Gear"],
-	"UK3CB_V_Invisible",
+	"UK3CB_V_Invisible,UK3CB_V_Invisible,UK3CB_V_Invisible_Plate",
 	nil,
 	{}
 ] call CBA_Settings_fnc_init;

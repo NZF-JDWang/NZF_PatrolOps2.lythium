@@ -83,4 +83,11 @@ class patrolOps
 		class playerVehicleSpawn 			{};
 		
 	};
+	class ambushes
+	{
+		file = "PatrolOps\ambushes";
+		class iedAmbush						{};
+		class createAmbushSquad				{};
+
+	};
 };

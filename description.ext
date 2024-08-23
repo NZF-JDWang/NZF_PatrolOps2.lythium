@@ -20,7 +20,7 @@ disableChannels[] = {
 //*****************************************************************************************************************
 //Mission Details
 author			= "[NZF]JD Wang";
-onLoadName		= "NZF PATROL OPERATIONS";
+onLoadName		= "NZF PATROL OPERATIONS V2";
 onLoadMission	= "";
 loadScreen		= "media\images\titleshot.jpg";
 overviewPicture  = "media\images\overview.paa";

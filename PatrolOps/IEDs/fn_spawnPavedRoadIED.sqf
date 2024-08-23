@@ -45,7 +45,7 @@ if (_iedType == "CAR") then {
     _bombObj setVariable ["iedd_ied_dud",2]; // 2% chance to dud
     _bombObj setVariable ["iedd_ied_size",4]; // Large explosion size
     
-    patrolOpsAll_IEDs pushback _bombObj;
+    patrolOps_allIEDs pushback _bombObj;
 
     _bombObj enableSimulationGlobal true;
 
@@ -71,7 +71,7 @@ if (_iedType == "CAR") then {
     _ied = createVehicle [_iedClass, _locationIED, [], 0.25, "CAN_COLLIDE"];
     _ied setVectorUp surfaceNormal (getpos _ied);
     _ied enableSimulationGlobal false;
-    patrolOpsAll_IEDs pushback _ied;
+    patrolOps_allIEDs pushback _ied;
 
     // Add event handler for IED explosion
     _ied addMPEventHandler ["MPKilled", {

@@ -56,8 +56,6 @@ switch (_iedType) do {
 			_garbage enableSimulationGlobal false;
 			patrolOps_miscCleanUp pushback _garbage;
 		};
-
-
 	};
 
 	case "TRASHPILE": {

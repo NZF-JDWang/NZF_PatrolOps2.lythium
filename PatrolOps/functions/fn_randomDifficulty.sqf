@@ -16,8 +16,8 @@
 
 // Define the probabilities for each difficulty level
 
-private _probabilityLow = 0.2;   	// 20% chance for "low"
-private _probabilityMedium = 0.7; 	// 50% chance for "medium"
+private _probabilityLow = 0.1;   	// 10% chance for "low"
+private _probabilityMedium = 0.7; 	// 60% chance for "medium"
 									// 30% chance for "high"
 
 // Generate a random number between 0 and 1

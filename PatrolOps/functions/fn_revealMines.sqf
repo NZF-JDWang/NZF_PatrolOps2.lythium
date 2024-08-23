@@ -16,7 +16,7 @@
 
 
 while {true} do {
-	{Civilian revealMine _x} foreach patrolOpsAll_IEDs;
-	{OPFOR revealMine _x} foreach patrolOpsAll_IEDs;
+	{Civilian revealMine _x} foreach patrolOps_allIEDs;
+	{OPFOR revealMine _x} foreach patrolOps_allIEDs;
 	sleep 5;
 };
