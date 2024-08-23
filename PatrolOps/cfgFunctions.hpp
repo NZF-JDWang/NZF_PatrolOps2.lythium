@@ -86,8 +86,9 @@ class patrolOps
 	class ambushes
 	{
 		file = "PatrolOps\ambushes";
-		class iedAmbush						{};
-		class createAmbushSquad				{};
+		class iedAmbushes					{};
+		class townAmbushes					{};
+		class roadAmbushes					{};
 
 	};
 };

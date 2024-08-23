@@ -16,7 +16,6 @@
 
 params ["_iedType", "_locationIED"];
 
-
 // IED types can be "CAR", "TRASHPILE" or "BURIED"
 switch (_iedType) do {
 

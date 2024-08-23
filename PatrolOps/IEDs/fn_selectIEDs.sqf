@@ -24,6 +24,5 @@ private _locationsIn = allMapMarkers select {_x find "debugPotentialIED_in" >= 0
 _numberOfOutIEDs = [] call PatrolOps_fnc_getNumberOfIEDs;
 _numberOfInIEDs = [] call PatrolOps_fnc_getNumberOfIEDs;
 
-[_locationsOut, _numberOfOutIEDs] call PatrolOps_fnc_processIEDLocations;
-[_locationsIn, _numberOfInIEDs] call PatrolOps_fnc_processIEDLocations; 
-
+[_locationsOut, _numberOfOutIEDs] spawn PatrolOps_fnc_processIEDLocations;
+[_locationsIn, _numberOfInIEDs] spawn PatrolOps_fnc_processIEDLocations; 

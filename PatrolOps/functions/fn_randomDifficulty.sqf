@@ -17,8 +17,8 @@
 // Define the probabilities for each difficulty level
 
 private _probabilityLow = 0.1;   	// 10% chance for "low"
-private _probabilityMedium = 0.7; 	// 60% chance for "medium"
-									// 30% chance for "high"
+private _probabilityMedium = 0.8; 	// 60% chance for "medium"
+									// 20% chance for "high"
 
 // Generate a random number between 0 and 1
 private _randomNumber = random 1;

@@ -13,7 +13,7 @@
     - Nothing
 
     Examples:
-    [] call PatrolOps_fnc_iedAmbush
+    [] call PatrolOps_fnc_iedAmbushes
 */
 
 if (!isServer) exitWith {}; // Ensure the script only runs on the server

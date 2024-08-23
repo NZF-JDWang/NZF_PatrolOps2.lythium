@@ -109,10 +109,18 @@ if (_routeCheck) then {
     // Ambush Locations
     [
         {
-        [] call PatrolOps_fnc_iedAmbush;
+        [] call PatrolOps_fnc_iedAmbushes;
         }, 
         [], 
-        2
+        5
+    ] call CBA_fnc_waitAndExecute;
+
+    [
+        {
+        [] call PatrolOps_fnc_townAmbushes;
+        }, 
+        [], 
+        5
     ] call CBA_fnc_waitAndExecute;
 
     [] spawn PatrolOps_fnc_revealMines;
