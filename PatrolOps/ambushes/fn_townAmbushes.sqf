@@ -17,7 +17,7 @@
 */
 
 if (!isServer) exitWith {}; // Ensure the script only runs on the server
-private ["_possibleLocations", "_minEncounters", "_midEncounters", "_maxEncounters", "_numberOfAmbushes", "_ambushTowns", "_selectedTown"];
+private ["_possibleLocations", "_minEncounters", "_midEncounters", "_maxEncounters", "_numberOfAmbushes", "_selectedTown"];
 private _difficulty = missionNamespace getVariable ["patrolDifficulty", "MEDIUM"]; // Default value if not set
 
 // Filter map markers for ambush locations
@@ -38,13 +38,13 @@ switch (_difficulty) do {
     case "HIGH": {_numberOfAmbushes = round (random [_midEncounters,_maxEncounters,_maxEncounters]);};
 };
 
-missionNamespace setVariable ["TownAmbushes",_numberOfAmbushes, true];
+
 _ambushTowns = [];
 
 for "_i" from 1 to _numberOfAmbushes do {
 	_selectedTown = selectRandom _possibleLocations;
 	_possibleLocations = _possibleLocations - [_selectedTown];
-	_ambushTowns pushBack _selectedTown;
+	[getMarkerPos _selectedTown] spawn PatrolOps_fnc_spawnStaticHMG;
 
 	// Debug marker for ambush location
     ["ambushTown", "mil_warning", getmarkerPos _selectedTown, "ColorRED", "AMBUSH", 1] call PatrolOps_fnc_debugMarkers;

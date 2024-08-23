@@ -57,6 +57,8 @@ class patrolOps
 		class timeCycle						{};
 		class revealMines					{};
 		class checkOverlap					{};
+		class checkLOS						{};
+		class findOverwatch					{};
 
 	};
 	class objectives
@@ -89,6 +91,8 @@ class patrolOps
 		class iedAmbushes					{};
 		class townAmbushes					{};
 		class roadAmbushes					{};
+		class spawnStaticHMG				{};
+		class roadblock						{};
 
 	};
 };

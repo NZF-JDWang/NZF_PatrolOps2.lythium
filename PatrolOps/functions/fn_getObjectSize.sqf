@@ -1,8 +1,8 @@
 /*
-    Author: Grok 2
+    Author: Grok 2, Optimized
 
     Description:
-        Calculates the size of an object based on its bounding box.
+        Calculates the size of an object based on its bounding box using config data.
 
     Parameters:
         0: OBJECT TYPE <STRING> - The class name of the object.
@@ -17,16 +17,33 @@
 PatrolOps_fnc_getObjectSize = {
     params ["_objectType"];
 
-    // Create a dummy object to get its size
-    private _dummyObject = createVehicle [_objectType, [0, 0, 0], [], 0, "NONE"];
-    private _boundingBox = boundingBoxReal _dummyObject;
-    private _boundingBoxSize = _boundingBox # 1 vectorDiff (_boundingBox # 0);
+    // Check if the result is already cached
+    if (isNil "PatrolOps_objectSizeCache") then {
+        PatrolOps_objectSizeCache = [];
+    };
+    private _cachedSize = PatrolOps_objectSizeCache getVariable [_objectType, nil];
+    if (!isNil "_cachedSize") exitWith {_cachedSize};
 
-    // Calculate the largest dimension
-    private _largestDimension = (abs (_boundingBoxSize # 0) max abs (_boundingBoxSize # 1) max abs (_boundingBoxSize # 2));
-
-    // Delete the dummy object
-    deleteVehicle _dummyObject;
-
-    _largestDimension
+    // Get bounding box dimensions from config
+    private _config = configFile >> "CfgVehicles" >> _objectType;
+    if (isClass _config) then {
+        private _boundingBox = getArray (_config >> "boundingBox");
+        if (count _boundingBox == 6) then {
+            private _min = [_boundingBox # 0, _boundingBox # 1, _boundingBox # 2];
+            private _max = [_boundingBox # 3, _boundingBox # 4, _boundingBox # 5];
+            private _size = _max vectorDiff _min;
+            private _largestDimension = abs (_size # 0) max abs (_size # 1) max abs (_size # 2);
+            
+            // Cache the result
+            PatrolOps_objectSizeCache setVariable [_objectType, _largestDimension];
+            
+            _largestDimension
+        } else {
+            // If boundingBox is not in the expected format, use a default or fallback method
+            0
+        };
+    } else {
+        // If the class doesn't exist, return 0 or handle as appropriate
+        0
+    };
 };

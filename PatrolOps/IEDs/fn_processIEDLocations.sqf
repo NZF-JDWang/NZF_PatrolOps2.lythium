@@ -17,15 +17,15 @@
 */
 
 params ["_locations", "_numberOfIEDs"];
-private ["_locationIED"];
 
 private _repeat = count _locations;
 // Work out the spacing
 private _spacing = round (_repeat / _numberOfIEDs);
 
 for "_i" from 0 to _repeat step _spacing do {
-    // Get next location
-    _locationIED = getMarkerPos (_locations select _i);
+    // Declare _locationIED inside the loop where it's used
+    private _locationIED = getMarkerPos (_locations select _i);
+    
     // Get the type of IED to spawn 
     private _iedAndRoadType = [_locationIED] call patrolOps_fnc_selectIEDtype;
     _iedAndRoadType params ["_iedType", "_roadType"];
@@ -39,7 +39,7 @@ for "_i" from 0 to _repeat step _spacing do {
         // Spawn configuration function and wait for it to finish
         private _configHandle = [_iedType, _locationIED] spawn PatrolOps_fnc_configurePavedRoadIED;
         waitUntil {scriptDone _configHandle};
-        
+        sleep 1;
         // Now spawn the IED after configuration is complete
         [_iedType, _locationIED] call PatrolOps_fnc_spawnPavedRoadIED;
 
@@ -47,7 +47,7 @@ for "_i" from 0 to _repeat step _spacing do {
         // Spawn configuration function and wait for it to finish
         private _configHandle = [_iedType, _locationIED] spawn PatrolOps_fnc_configureDirtRoadIED;
         waitUntil {scriptDone _configHandle};
-        
+        sleep 1;
         // Now spawn the IED after configuration is complete
         [_iedType, _locationIED] call PatrolOps_fnc_spawnDirtRoadIED;
     };
