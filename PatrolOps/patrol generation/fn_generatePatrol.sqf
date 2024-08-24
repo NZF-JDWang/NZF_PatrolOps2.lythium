@@ -70,14 +70,8 @@ if (_routeCheck) then {
     {_x setMarkerAlpha 1} forEach patrolOps_allRouteMarkers;
 
     // Find any locations the patrol route passes by 
-    [
-        {
-        [] spawn PatrolOps_fnc_findSideLocations;
-        }, 
-        [], 
-        3
-    ] call CBA_fnc_waitAndExecute;
-  
+    _sideLocations = [] spawn PatrolOps_fnc_findSideLocations;
+    waitUntil {scriptDone _sideLocations};
 
     // Spawn player vehicles
     [_playerTotal] call PatrolOps_fnc_playerVehicleSpawn;
@@ -86,44 +80,20 @@ if (_routeCheck) then {
     [] call PatrolOps_fnc_generateObjective;
 
     // Generate potential POI locations to spawn IED's and clutter then spawn them
-    [
-        {
-        [] call PatrolOps_fnc_findPOILocations;
-        }, 
-        [], 
-        1
-    ] call CBA_fnc_waitAndExecute;
+    _poiLocations = [] spawn PatrolOps_fnc_findPOILocations;
+    waitUntil {scriptDone _poiLocations};
 
-    [
-        {
-        [] call PatrolOps_fnc_selectIEDs;
-        }, 
-        [], 
-        2
-    ] call CBA_fnc_waitAndExecute;
+    _selectIEDs = [] spawn PatrolOps_fnc_selectIEDs;
+    waitUntil {scriptDone _selectIEDs};
+
+    // Ambush Locations
+    [] spawn PatrolOps_fnc_iedAmbushes;  
+    [] spawn PatrolOps_fnc_townAmbushes;
+    [] spawn PatrolOps_fnc_revealMines;
 
     missionNamespace setVariable ["regen", 0];
     // Fade back in 
     [1, "BLACK", 3, 1] remoteExec ["BIS_fnc_fadeEffect"];
-
-    // Ambush Locations
-    [
-        {
-        [] call PatrolOps_fnc_iedAmbushes;
-        }, 
-        [], 
-        5
-    ] call CBA_fnc_waitAndExecute;
-
-    [
-        {
-        [] call PatrolOps_fnc_townAmbushes;
-        }, 
-        [], 
-        5
-    ] call CBA_fnc_waitAndExecute;
-
-    [] spawn PatrolOps_fnc_revealMines;
      
     // Drop some information into the logs for debug purpose
     diag_log "*******************************************************************************";
@@ -132,12 +102,4 @@ if (_routeCheck) then {
     diag_log "*******************************************************************************";
 
 };
-
-
-  
-
-
-
-
-
 

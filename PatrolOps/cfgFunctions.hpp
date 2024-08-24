@@ -56,8 +56,6 @@ class patrolOps
 		class getObjectSize 				{};
 		class timeCycle						{};
 		class revealMines					{};
-		class checkOverlap					{};
-		class checkLOS						{};
 		class findOverwatch					{};
 
 	};

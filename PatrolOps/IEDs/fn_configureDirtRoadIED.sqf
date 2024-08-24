@@ -14,13 +14,16 @@
 		[_iedType, _locationIED] call PatrolOps_fnc_configureDirtRoadIED;
 */
 
-params ["_iedType", "_locationIED"];
+params ["_iedType", ["_locationIED", [0,0,0]]];
 
 // IED types can be "CAR", "TRASHPILE" or "BURIED"
 switch (_iedType) do {
 
 
 	case "CAR": {
+		if (isNil "_locationIED") exitWith {
+		diag_log "[PatrolOps_fnc_configureDirtRoadIED] Error: _locationIED is undefined for CAR IED";
+		};
 		// Get list of cars
 		private _allCars = parseSimpleArray grad_civs_cars_vehicles;
 		_allCars = _allCars - ["UK3CB_TKC_C_YAVA","UK3CB_TKC_C_TT650"];
@@ -60,7 +63,9 @@ switch (_iedType) do {
 	case "TRASHPILE": {
 
 		for "_i" from 1 to (floor random (3)+1) do {
-
+			if (isNil "_locationIED") exitWith {
+			diag_log "[PatrolOps_fnc_configureDirtRoadIED] Error: _locationIED is undefined for TRASHPILE IED";
+			};
 			// Get trash objects 
 			private _allTrash = parseSimpleArray patrolOpsRoadClutter;
 			private _trashType = selectRandom _allTrash;
@@ -78,7 +83,7 @@ switch (_iedType) do {
 				_garbageType = selectrandom ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
 				private _garbage = createVehicle [_garbageType, (getpos _trashpile), [], ((random 1.5)+ 0.5), "CAN_COLLIDE"];
 				_garbage setdir (random 360);
-				_garbage setVectorUp surfaceNormal (getposATL _garbage);
+				_garbage setVectorUp surfaceNormal (getposATL _trashpile);
 				_garbage enableSimulationGlobal false;
 				patrolOps_miscCleanUp pushback _garbage;
 			};
@@ -87,7 +92,9 @@ switch (_iedType) do {
 	};
 
 	case "BURIED": {
-
+		if (isNil "_locationIED") exitWith {
+        diag_log "[PatrolOps_fnc_configureDirtRoadIED] Error: _locationIED is undefined for BURIED IED";
+   		 };
 		// Get dirt objects 
 		private _allDirtObjects = parseSimpleArray patrolOpsDirtClutter;
 		private _dirtType = selectRandom _allDirtObjects;
@@ -108,7 +115,7 @@ switch (_iedType) do {
 			_garbageType = selectrandom ["Land_Garbage_square3_F","Land_Garbage_square5_F","Land_Garbage_line_F"];
 			private _garbage = createVehicle [_garbageType, (getpos _dirtpile), [], ((random 1.5)+ 0.5), "CAN_COLLIDE"];
 			_garbage setdir (random 360);
-			_garbage setVectorUp surfaceNormal (getposATL _garbage);
+			_garbage setVectorUp surfaceNormal (getposATL _dirtpile);
 			_garbage enableSimulationGlobal false;
 			patrolOps_miscCleanUp pushback _garbage;
 		};

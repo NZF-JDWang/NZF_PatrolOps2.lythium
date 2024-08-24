@@ -1,23 +1,23 @@
 /*
-	Author: JD Wang
+    Author: JD Wang, Modified by Grok 2
 
-	Description:
-		Finds locations within 500m of the route 
+    Description:
+        Finds locations within 500m of the route, excluding those within 500m of the start FOB location.
 
+    Parameter(s):
+        NONE
 
-	Parameter(s):
-		NONE
+    Returns:
+        Nothing
 
-	Returns:
-		Nothing
-
-	Examples:
-		[] call PatrolOps_fnc_findSideLocations;
+    Examples:
+        [] call PatrolOps_fnc_findSideLocations;
 */
-private ["_testPoint", "_routeMarkers", "_onRouteLocations"];
+private ["_testPoint", "_routeMarkers", "_onRouteLocations", "_startFOBLocation"];
 
 // Retrieve all route markers stored in the mission namespace.
 _routeMarkers = missionNamespace getVariable ["patrolOps_allRouteMarkers", []];
+_startFOBLocation = getMarkerPos (missionNamespace getVariable "startingFOB");
 
 // Initialize an array to store on-route locations.
 _onRouteLocations = [];
@@ -33,13 +33,16 @@ _onRouteLocations = [];
 
         // Check if _testPoint is not empty and is not equal to the first patrol location data.
         if ((count _testPoint > 0) && !(_testPoint isEqualTo (firstPatrolLocationData select 0))) then {
-            // Add the _testPoint to the list of on-route locations.
-            _onRouteLocations pushBackUnique _testPoint;
+            // Check if _testPoint is not within 500m of _startFOBLocation
+            if (_testPoint distance2D _startFOBLocation > 500) then {
+                // Add the _testPoint to the list of on-route locations.
+                _onRouteLocations pushBackUnique _testPoint;
 
-            // Spawn a debug marker at _testPoint with specific parameters.
-            ["sideLocation", "selector_selectable", _testPoint, "ColorCIV", "", 1.5] spawn PatrolOps_fnc_debugMarkers;
+                // Spawn a debug marker at _testPoint with specific parameters.
+                ["sideLocation", "selector_selectable", _testPoint, "ColorCIV", "", 1.5] spawn PatrolOps_fnc_debugMarkers;
+            };
         };
     };
 } forEach _routeMarkers; // End of foreach loop for route markers.
 
-
+true;

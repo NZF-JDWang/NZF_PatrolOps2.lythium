@@ -2,48 +2,49 @@
     Author: Grok 2, Optimized
 
     Description:
-        Calculates the size of an object based on its bounding box using config data.
+        Calculates the size of an object based on its bounding box or defaults to a known size if not calculable.
 
     Parameters:
-        0: OBJECT TYPE <STRING> - The class name of the object.
+        0: OBJECT or STRING - Either the object itself or its class name.
 
     Returns:
-        NUMBER - The largest dimension of the object.
+        NUMBER - The largest dimension of the object, or a default size if not calculable.
 
     Example:
         _size = ["B_supplyCrate_F"] call PatrolOps_fnc_getObjectSize;
+        // or with an object
+        _size = [player] call PatrolOps_fnc_getObjectSize;
 */
 
-PatrolOps_fnc_getObjectSize = {
-    params ["_objectType"];
+params [["_object", objNull, [objNull, ""]]];
 
-    // Check if the result is already cached
-    if (isNil "PatrolOps_objectSizeCache") then {
-        PatrolOps_objectSizeCache = [];
-    };
-    private _cachedSize = PatrolOps_objectSizeCache getVariable [_objectType, nil];
-    if (!isNil "_cachedSize") exitWith {_cachedSize};
+// If a string (class name) is provided, we'll attempt to create a temporary object for measurement
+if (_object isEqualType "") then {
+    // Create a temporary object for size calculation
+    private _tempObject = createVehicle [_object, [0,0,0], [], 0, "CAN_COLLIDE"];
+    private _boundingBox = boundingBoxReal _tempObject;
+    deleteVehicle _tempObject; // Clean up temporary object
+    
+    if (count _boundingBox != 2) exitWith { 2 }; // Default size if bounding box can't be determined
 
-    // Get bounding box dimensions from config
-    private _config = configFile >> "CfgVehicles" >> _objectType;
-    if (isClass _config) then {
-        private _boundingBox = getArray (_config >> "boundingBox");
-        if (count _boundingBox == 6) then {
-            private _min = [_boundingBox # 0, _boundingBox # 1, _boundingBox # 2];
-            private _max = [_boundingBox # 3, _boundingBox # 4, _boundingBox # 5];
-            private _size = _max vectorDiff _min;
-            private _largestDimension = abs (_size # 0) max abs (_size # 1) max abs (_size # 2);
-            
-            // Cache the result
-            PatrolOps_objectSizeCache setVariable [_objectType, _largestDimension];
-            
-            _largestDimension
-        } else {
-            // If boundingBox is not in the expected format, use a default or fallback method
-            0
-        };
-    } else {
-        // If the class doesn't exist, return 0 or handle as appropriate
-        0
-    };
+    // Extract the dimensions from the bounding box
+    private _length = (_boundingBox select 1 select 0) - (_boundingBox select 0 select 0);
+    private _width = (_boundingBox select 1 select 1) - (_boundingBox select 0 select 1);
+    private _height = (_boundingBox select 1 select 2) - (_boundingBox select 0 select 2);
+
+    // Return the largest dimension
+    [_length, _width, _height] call BIS_fnc_greatestNum;
+} else {
+    // For objects, proceed as before
+    private _boundingBox = boundingBoxReal _object;
+    
+    if (count _boundingBox != 2) exitWith { 2 }; // Default size if bounding box can't be determined
+
+    // Extract the dimensions from the bounding box
+    private _length = (_boundingBox select 1 select 0) - (_boundingBox select 0 select 0);
+    private _width = (_boundingBox select 1 select 1) - (_boundingBox select 0 select 1);
+    private _height = (_boundingBox select 1 select 2) - (_boundingBox select 0 select 2);
+
+    // Return the largest dimension
+    [_length, _width, _height] call BIS_fnc_greatestNum;
 };

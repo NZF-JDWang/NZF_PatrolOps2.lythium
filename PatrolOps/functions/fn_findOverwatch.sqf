@@ -1,75 +1,71 @@
 /*
-    Author: JD Wang 
-
-    Description:
-        Searches for an overwatch position for an object near a specified location. 
-        This function makes two attempts to find a suitable position:
-        - First attempt with a higher maximum gradient (15 degrees).
-        - Second attempt with a reduced maximum gradient (5 degrees) if the first fails.
-        Each attempt checks for a safe position and line of sight from the object to the target location.
-
-    Parameters:
-        _location - ARRAY - The target location around which to search for an overwatch position.
-        _object - OBJECT - The object from which the overwatch is being sought.
-
-    Returns:
-        ARRAY - The coordinates of the overwatch location if found, otherwise it returns [0,0,0].
-
-    Examples:
-        _overwatchPos = [_targetLocation, player] call PatrolOps_fnc_findOverwatch;
-
-    Notes:
-        - The function uses `lambs_main_fnc_findOverwatch` for finding potential overwatch positions.
-        - Safe positions are checked using `BIS_fnc_findSafePos`.
-        - Line of sight is verified using `PatrolOps_fnc_checkLineOfSight`.
-        - If no overwatch position meets the criteria, [0,0,0] is returned.
+* Author: jokoho482, Modified by Grok 2
+* Returns Overwatch Positions with line of sight check using lineIntersects
+*
+* Warning:
+* It is possible that this function does not generate any positions and Returns [0,0,0]!
+*
+* Arguments:
+* 0: Target Position <ARRAY>
+* 1: Maximum distance from Target in meters <NUMBER>
+* 2: Minimum distance from Target in meters <NUMBER>
+* 3: Minimum height in relation to Target in meters <NUMBER>
+* 4: Position to start looking from <ARRAY>
+*
+* Return Value:
+* Position of a Possible Overwatch Position or [0,0,0] if none found
+*
+* Example:
+* [getPos bob, 10, 50, 8, getPos jonny] call PatrolOps_fnc_findOverwatch;
+*
+* Public: Yes
 */
 
-params ["_location", "_object"];
-private ["_noSafePos", "_hasLOS", "_return", "_firstCheckAttempt", "_secondCheckAttempt"];
+params [
+    ["_targetPos", [0, 0, 0], [[]]],
+    ["_maxRange", 400, [0]],
+    ["_minRange", 20, [0]],
+    ["_minHeight", 4, [0]],
+    ["_centerPos", [0,0,0], [[]]]
+];
 
-_return = [0,0,0];
-_noSafePos = false;  // Initialize _noSafePos
-_hasLOS = false;     // Initialize _hasLOS
+private _refObj = nearestObject [_targetPos, "All"];
+private _result = [0,0,0];
+private _selectedPositions = [];
 
-// First attempt
-_firstCheckAttempt = [getpos _object, 400, 25, 15, _location] call lambs_main_fnc_findOverwatch;
-if (count _firstCheckAttempt > 0) then {
-
-	private _safePos = [_firstCheckAttempt, 0, 20, 1, 0, 0.25] call BIS_fnc_findSafePos;
-	if (_safePos isEqualTo [0,0,0]) then {
-			_noSafePos = true;
-	} else {
-			_hasLOS = [getpos _object, _location] call PatrolOps_fnc_checkLineOfSight;
-	};
-
+private _fnc_selectResult = {
+    // Found position(s)
+    private _heightSorted = _selectedPositions apply {[(_refObj worldToModel _x) select 2, _x]};
+    _heightSorted sort false;
+    _result = (_heightSorted param [0]) param [1, _centerPos];
+    _result breakOut "PatrolOps_findOverwatch";
 };
 
-if (_hasLOS && !_noSafePos) then {
+for "_i" from 0 to 300 do {
+    private _checkPos = [_centerPos, 0, _maxRange, 3, 0, 50, 0, [], []] call BIS_fnc_findSafePos;
+    private _height = (_refObj worldToModel _checkPos) select 2;
+    private _dis = _checkPos distance _targetPos;
 
-	_return = _firstCheckAttempt;
+    // Check for line of sight using lineIntersects
+    private _hasLOS = lineIntersects [_checkPos, _targetPos, objNull, objNull, true, 1];
 
-};
-// Second attempt reduce the height
-if (count _firstCheckAttempt < 1) then {
+    if (_dis > _minRange) then {
+        if (_result isEqualTo [0,0,0] && !_hasLOS) then {
+            _result = _checkPos;
+        };
 
-	_secondCheckAttempt = [getpos _object, 400, 25, 5, _location] call lambs_main_fnc_findOverwatch;
-	if (count _secondCheckAttempt > 0) then {
+        if (_height > _minHeight && !_hasLOS) then {
+            _selectedPositions pushBack _checkPos;
+        };
+    };
 
-		private _safePos = [_secondCheckAttempt, 0, 20, 1, 0, 0.25] call BIS_fnc_findSafePos;
-		if (_safePos isEqualTo [0,0,0]) then {
-				_noSafePos = true;
-		} else {
-				_hasLOS = [getpos _object, _location] call PatrolOps_fnc_checkLineOfSight;
-		};
-
-	};
-	if (_hasLOS && !_noSafePos) then {
-
-	_return = _secondCheckAttempt;
-
-	};
-
+    if (count _selectedPositions >= 5) then {
+        call _fnc_selectResult;
+    };
 };
 
-_return;
+if (_selectedPositions isNotEqualTo []) then {
+    call _fnc_selectResult;
+};
+
+_result

@@ -26,8 +26,12 @@ private _allMissionMarkers = allMapMarkers - patrolOps_patrolBases;
 {deletevehicle  _x} foreach patrolOps_playerInfantryVehicles;
 {deletevehicle  _x} foreach patrolOps_playerEDOVehicles;
 
-//Delete all OPFOR 
-{deletevehicle (vehicle _x)} foreach (units opfor);
+// Delete all OPFOR units and their vehicles
+{
+    if (side _x == opfor) then { 
+        deleteVehicle (vehicle _x); 
+    };
+} forEach allUnits;
 
 // Delete misc Objects and IED's
 {deletevehicle  _x} foreach patrolOps_miscCleanUp;
@@ -47,14 +51,15 @@ missionnamespace setvariable ["patrolOps_NZFCasualties", 0, true];
 missionnamespace setvariable ["patrolOps_allRouteMarkers", nil, true];
 missionnamespace setvariable ["patrolLength", nil, true];
 
-patrolOps_playerEDOVehicles = [];
-patrolOps_playerInfantryVehicles = [];
-patrolOps_miscCleanUp = [];
-patrolOps_Garrisons = [];
-patrolOps_allClutter = [];
-patrolOps_allIEDs = [];
-patrolOps_IEDHelpers = [];
-patrolOps_allTriggers = [];
+// Clear arrays
+missionNamespace setVariable ["patrolOps_playerEDOVehicles", [], true];
+missionNamespace setVariable ["patrolOps_playerInfantryVehicles", [], true];
+missionNamespace setVariable ["patrolOps_miscCleanUp", [], true];
+missionNamespace setVariable ["patrolOps_Garrisons", [], true];
+missionNamespace setVariable ["patrolOps_allClutter", [], true];
+missionNamespace setVariable ["patrolOps_allIEDs", [], true];
+missionNamespace setVariable ["patrolOps_IEDHelpers", [], true];
+missionNamespace setVariable ["patrolOps_allTriggers", [], true];
 
 // Reset Mission Generation 
 missionnamespace setvariable ["MissionClean", true];
