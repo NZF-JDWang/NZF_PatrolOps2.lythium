@@ -2,7 +2,7 @@
     Author: JD Wang, Modified by Grok 2
 
     Description:
-        Finds locations within 500m of the route, excluding those within 500m of the start FOB location.
+        Finds locations within 500m of the route, excluding those within 500m of the start or end FOB locations.
 
     Parameter(s):
         NONE
@@ -13,11 +13,12 @@
     Examples:
         [] call PatrolOps_fnc_findSideLocations;
 */
-private ["_testPoint", "_routeMarkers", "_onRouteLocations", "_startFOBLocation"];
+private ["_testPoint", "_routeMarkers", "_onRouteLocations", "_startFOBLocation", "_endFOBLocation"];
 
 // Retrieve all route markers stored in the mission namespace.
 _routeMarkers = missionNamespace getVariable ["patrolOps_allRouteMarkers", []];
 _startFOBLocation = getMarkerPos (missionNamespace getVariable "startingFOB");
+_endFOBLocation = getMarkerPos (missionNamespace getVariable "endFOB");
 
 // Initialize an array to store on-route locations.
 _onRouteLocations = [];
@@ -33,8 +34,8 @@ _onRouteLocations = [];
 
         // Check if _testPoint is not empty and is not equal to the first patrol location data.
         if ((count _testPoint > 0) && !(_testPoint isEqualTo (firstPatrolLocationData select 0))) then {
-            // Check if _testPoint is not within 500m of _startFOBLocation
-            if (_testPoint distance2D _startFOBLocation > 500) then {
+            // Check if _testPoint is not within 500m of _startFOBLocation or _endFOBLocation
+            if (_testPoint distance2D _startFOBLocation > 500 && _testPoint distance2D _endFOBLocation > 500) then {
                 // Add the _testPoint to the list of on-route locations.
                 _onRouteLocations pushBackUnique _testPoint;
 

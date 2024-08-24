@@ -98,7 +98,14 @@ if (count _ambushLocations < _numberOfAmbushes) then {
     ", _squads];
 
     // Set the trigger statements
-    _ambushTrigger setTriggerStatements ["this", _statement, ""];
+    _ambushTrigger setTriggerStatements [
+        "this && {isNil {(thistrigger getVariable ['hasTriggered', nil])}}",
+        format ["
+            thistrigger setVariable ['hasTriggered', true, true];
+            %1
+        ", _statement],
+        ""
+    ];
     patrolOps_allTriggers pushback _ambushTrigger;
 
     // Debug marker for ambush location

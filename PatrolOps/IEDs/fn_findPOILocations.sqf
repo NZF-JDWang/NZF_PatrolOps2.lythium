@@ -13,7 +13,6 @@
     Examples:
         [] call PatrolOps_fnc_findPOILocations;
 */
-
 private _numberOfLocations = 15;
 if (_numberOfLocations <= 0) exitWith {
     if (PATROLOPS_DEBUG) then {
@@ -21,6 +20,7 @@ if (_numberOfLocations <= 0) exitWith {
     };
 };
 
+private ["_marker"];
 // Get the outRoute markers and delete the first and last few to avoid IED at base and on target
 // Then do the same for the inRoute
 private _outRoute = allMapMarkers select {_x find "outRoute" >= 0};
@@ -38,45 +38,43 @@ private _spacing = ((count _outRoute) / _numberOfLocations);
 private _min = round (_spacing * 0.8);
 private _max = round (_spacing * 1.2);
 
-for "_i" from 1 to _numberOfLocations do {
-    private _variation = round (random [_min, _spacing, _max]);
-    if (_i * _variation >= count _outRoute) then {
-        _variation = (count _outRoute - 1) / _i; // Ensure last valid index
-    };
-    private _selectionMarker = _outRoute select floor _variation;
-    private _selection = [getMarkerPos _selectionMarker, 100] call BIS_fnc_nearestRoad;
+for "_i" from 1 to (_numberOfLocations - 1) do {
+    _variation = round (random [_min, _spacing, _max]);
+    if (_i * _variation < count _outRoute) then {
+        _selectionMarker = _outRoute select (_i * _variation);
+        _selection = [getMarkerPos _selectionMarker, 100] call BIS_fnc_nearestRoad;
 
-    private _marker = createMarkerLocal ["debugPotentialIED_out" + str _selection, _selection];
-    _marker setMarkerTypeLocal "loc_destroy";
-    _marker setMarkerColorLocal "colorWhite";
-    if (PATROLOPS_DEBUG) then {
-        _marker setMarkerAlphaLocal 0;
+        _marker = createMarkerLocal ["debugPotentialIED_out" + str _selection, _selection];
+        _marker setMarkerTypeLocal "loc_destroy";
+        _marker setMarkerColorLocal "colorWhite";
+        if (PATROLOPS_DEBUG) then {_marker setMarkerAlphaLocal 0} else {_marker setMarkerAlphaLocal 1};
+        _marker setMarkerSize [1, 1]; 
     } else {
-        _marker setMarkerAlphaLocal 1;
+        if (PATROLOPS_DEBUG) then {
+            systemChat format ["Warning: Out of bounds for outRoute at index %1", _i];
+        };
     };
-    _marker setMarkerSize [1, 1]; 
 };
 
 // Select random locations along the inRoute 
 private _spacingIn = ((count _inRoute) / _numberOfLocations);
-private _minIn = round (_spacingIn * 0.7);
-private _maxIn = round (_spacingIn * 1.2);
+private _min = round (_spacingIn * 0.7);
+private _max = round (_spacingIn * 1.2);
 
-for "_i" from 1 to _numberOfLocations do {
-    private _variation = round (random [_minIn, _spacingIn, _maxIn]);
-    if (_i * _variation >= count _inRoute) then {
-        _variation = (count _inRoute - 1) / _i; // Ensure last valid index
-    };
-    private _selectionMarker = _inRoute select floor _variation;
-    private _selection = [getMarkerPos _selectionMarker, 100] call BIS_fnc_nearestRoad;
+for "_i" from 1 to (_numberOfLocations - 1) do {
+    _variation = round (random [_min, _spacingIn, _max]);
+    if (_i * _variation < count _inRoute) then {
+        _selectionMarker = _inRoute select (_i * _variation);
+        _selection = [getMarkerPos _selectionMarker, 100] call BIS_fnc_nearestRoad;
 
-    private _marker = createMarkerLocal ["debugPotentialIED_in" + str _selection, _selection];
-    _marker setMarkerTypeLocal "loc_destroy";
-    _marker setMarkerColorLocal "colorWhite";
-    if (PATROLOPS_DEBUG) then {
-        _marker setMarkerAlphaLocal 0;
+        _marker = createMarkerLocal ["debugPotentialIED_in" + str _selection, _selection];
+        _marker setMarkerTypeLocal "loc_destroy";
+        _marker setMarkerColorLocal "colorWhite";
+        if (PATROLOPS_DEBUG) then {_marker setMarkerAlphaLocal 0} else {_marker setMarkerAlphaLocal 1};
+        _marker setMarkerSize [1, 1]; 
     } else {
-        _marker setMarkerAlphaLocal 1;
+        if (PATROLOPS_DEBUG) then {
+            systemChat format ["Warning: Out of bounds for inRoute at index %1", _i];
+        };
     };
-    _marker setMarkerSize [1, 1]; 
 };

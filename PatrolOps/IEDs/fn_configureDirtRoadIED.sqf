@@ -62,7 +62,7 @@ switch (_iedType) do {
 
 	case "TRASHPILE": {
 
-		for "_i" from 1 to (floor random (3)+1) do {
+		for "_i" from 1 to (floor random (2)+2) do {
 			if (isNil "_locationIED") exitWith {
 			diag_log "[PatrolOps_fnc_configureDirtRoadIED] Error: _locationIED is undefined for TRASHPILE IED";
 			};

@@ -28,7 +28,7 @@ private _allMissionMarkers = allMapMarkers - patrolOps_patrolBases;
 
 // Delete all OPFOR units and their vehicles
 {
-    if (side _x == opfor) then { 
+    if (side _x == EAST) then { 
         deleteVehicle (vehicle _x); 
     };
 } forEach allUnits;

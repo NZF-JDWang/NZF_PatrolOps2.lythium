@@ -42,7 +42,7 @@ private _fnc_selectResult = {
 };
 
 for "_i" from 0 to 300 do {
-    private _checkPos = [_centerPos, 0, _maxRange, 3, 0, 50, 0, [], []] call BIS_fnc_findSafePos;
+    private _checkPos = [_centerPos, 0, _maxRange, 3, 0, 0.1, 0, [], []] call BIS_fnc_findSafePos;
     private _height = (_refObj worldToModel _checkPos) select 2;
     private _dis = _checkPos distance _targetPos;
 

@@ -16,7 +16,7 @@
 */
 
 params ["_location"];
-private ["_overwatchLocation", "_nearestRoad"];
+private ["_overwatchLocation", "_nearestRoad", "_overwatchPosition"];
 
 private _nearestRoad = [(missionnamespace getvariable "patrolOps_allRouteMarkers"), _location] call BIS_fnc_nearestPosition;
 private _target = getMarkerpos _nearestRoad;
@@ -28,16 +28,17 @@ _overwatchPosition = [_target, 400, 25, 2, _target] call lambs_main_fnc_findOver
 
 missionnamespace setvariable ["OVERWATCH",_overwatchPosition,true];
 
-if (_overwatchPosition  isNotEqualTo [0,0,0]) then { 
-    ["overWatch", "loc_move", _overwatchPosition, "ColorRED", "Overwatch", 1] call PatrolOps_fnc_debugMarkers;
-    ["overWatchRoad", "mil_objective_noShadow", _target, "ColorWhite", "Overwatch", 1] call PatrolOps_fnc_debugMarkers;
-};
-
 if (_overwatchPosition distance _target < 25) then {
 
     [_target] call PatrolOps_fnc_roadblock;
+    ["Roadblock", "loc_defend", _target, "ColorBlack", "Overwatch", 1] call PatrolOps_fnc_debugMarkers;
 
 } else {
+    
+    if (_overwatchPosition  isNotEqualTo [0,0,0]) then { 
+        ["overWatch", "loc_move", _overwatchPosition, "ColorRED", "Overwatch", 1] call PatrolOps_fnc_debugMarkers;
+        ["overWatchRoad", "mil_objective_noShadow", _target, "ColorWhite", "Overwatch", 1] call PatrolOps_fnc_debugMarkers;
+    };
 
     // Now spawn the gunpit
     private _pit = createvehicle ["Land_ShellCrater_02_small_F", _overwatchPosition, [] , 0, "NONE"];
